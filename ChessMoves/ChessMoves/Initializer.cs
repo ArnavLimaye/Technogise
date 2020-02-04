@@ -94,7 +94,7 @@ namespace ChessMoves
             pieceNameToPieceMoveMap.Add("King", new List<MoveTypes> { MoveTypes.Horizontal, MoveTypes.Vertical, MoveTypes.Diagonal, MoveTypes.SingleCell });
             pieceNameToPieceMoveMap.Add("Queen", new List<MoveTypes> { MoveTypes.Horizontal, MoveTypes.Vertical, MoveTypes.Diagonal, MoveTypes.MultiCell });
             pieceNameToPieceMoveMap.Add("Bishop", new List<MoveTypes> { MoveTypes.Diagonal, MoveTypes.MultiCell });
-            pieceNameToPieceMoveMap.Add("Knight", new List<MoveTypes> { MoveTypes.Special });
+            pieceNameToPieceMoveMap.Add("Horse", new List<MoveTypes> { MoveTypes.Special });
             pieceNameToPieceMoveMap.Add("Rook", new List<MoveTypes> { MoveTypes.Horizontal, MoveTypes.Vertical, MoveTypes.MultiCell });
             pieceNameToPieceMoveMap.Add("Pawn", new List<MoveTypes> { MoveTypes.Vertical, MoveTypes.SingleCell,MoveTypes.OnlyForward });
         }
