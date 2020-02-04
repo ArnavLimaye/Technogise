@@ -15,13 +15,9 @@ namespace ChessMoves
 
         private List<MoveTypes> _allowedMoveTypes;
 
-        private int _initialCellRow;
+        private Cell _initialCell;
 
-        private int _initialCellColumn;
-
-        private List<int> _allowedRows;
-
-        private List<int> _allowedColumns;
+        private List<Cell> _allowedCells;
 
         public enum MoveTypes { Horizontal = 1, Vertical, Diagonal, Special, SingleCell, MultiCell }    //Special is for Knight's movement
         
@@ -29,13 +25,9 @@ namespace ChessMoves
 
         public List<MoveTypes> AllowedMoveTypes { get { return _allowedMoveTypes; } set { _allowedMoveTypes = value; } }
 
-        public int InitialCellRow { get { return _initialCellRow; } set { _initialCellRow = value; } }
+        public Cell InitialCell { get { return _initialCell; } set { _initialCell = InitialCell; } }
 
-        public int InitialCellColumn { get { return _initialCellColumn; } set {_initialCellColumn = value; } }
-
-        public List<int> AllowedRows { get { return _allowedRows; } set { _allowedRows = value; } }
-
-        public List<int> AllowedColumns { get { return _allowedColumns; } set { _allowedColumns = value; } }
+        public List<Cell> AllowedCells { get { return _allowedCells; } set { _allowedCells = value; } }
 
         internal void MapUserInputToChessPiece(string userInput)
         {
@@ -75,8 +67,17 @@ namespace ChessMoves
             if (!Initializer.rowNameToNumberMap.ContainsKey(rowChar.ToString()))
                 throw new ArgumentException("Invalid row number");
 
-            InitialCellColumn = Initializer.columnNameToNumberMap[columnChar.ToString()];
-            InitialCellRow = Initializer.rowNameToNumberMap[rowChar.ToString()];
+            int initialColumn = Initializer.columnNameToNumberMap[columnChar.ToString()];
+            int initialRow = Initializer.rowNameToNumberMap[rowChar.ToString()];
+            if (InitialCell == null)
+            {
+                InitialCell = new Cell() { Row = initialRow, Column = initialColumn };
+            }
+            else
+            {
+                InitialCell.Column = Initializer.columnNameToNumberMap[columnChar.ToString()];
+                InitialCell.Row = Initializer.rowNameToNumberMap[rowChar.ToString()];
+            }
         }
     }
 }

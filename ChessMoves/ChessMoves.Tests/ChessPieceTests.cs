@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,27 +23,26 @@ namespace ChessMoves.Tests
         {
             //Arrange
             string expectedName = "Rook";
-            List<int> expectedAllowedColumns = new List<int>(){ 2, 3 };
-            List<int> expectedAllowedRows = new List<int>() { 1, 2 };
+            List<Cell> expectedAllowedCells = new List<Cell> { new Cell() { Row = 1, Column = 2 }, new Cell() { Row = 2, Column = 3 } };
             List<MoveTypes> expectedAllowedMoveTypes = new List<MoveTypes>() { MoveTypes.Horizontal };
-            int expectedInitialRow = 3;
-            int expectedInitialColumn = 4;
+            Cell expectedInitialCell = new Cell() { Row = 3, Column = 4};
+            var expectedAllowedCellsStr = JsonConvert.SerializeObject(expectedAllowedCells);
+            var expectedInitialCellStr = JsonConvert.SerializeObject(expectedInitialCell);
+
             //Act
             ChessPiece piece = new ChessPiece();
             piece.Name = "Rook";
-            piece.AllowedColumns = new List<int>() { 2, 3 };
-            piece.AllowedRows = new List<int>() { 1, 2 };
+            piece.AllowedCells = new List<Cell> { new Cell() { Row = 1, Column = 2 }, new Cell() { Row = 2, Column = 3 } }; ;
             piece.AllowedMoveTypes = new List<MoveTypes>() { MoveTypes.Horizontal };
-            piece.InitialCellRow = 3;
-            piece.InitialCellColumn = 4;
+            piece.InitialCell = new Cell() { Row = 3, Column = 4 };
+            var allowedCellsStr = JsonConvert.SerializeObject(piece.AllowedCells);
+            var initialCellStr = JsonConvert.SerializeObject(piece.InitialCell);
 
             //Assert
             Assert.Equal(expectedName, piece.Name);
-            Assert.Equal(expectedAllowedColumns, piece.AllowedColumns);
-            Assert.Equal(expectedAllowedRows, piece.AllowedRows);
+            Assert.Equal(expectedAllowedCellsStr, allowedCellsStr);
             Assert.Equal(expectedAllowedMoveTypes, piece.AllowedMoveTypes);
-            Assert.Equal(expectedInitialColumn, piece.InitialCellColumn);
-            Assert.Equal(expectedInitialRow, piece.InitialCellRow);
+            Assert.Equal(expectedInitialCellStr, initialCellStr);
         }
 
         [Fact]
@@ -121,8 +121,8 @@ namespace ChessMoves.Tests
             piece.MapUserInputCellToChessPieceInitialRowColumn(inputCell);
 
             //Assert
-            Assert.Equal(expectedColumn, piece.InitialCellColumn);
-            Assert.Equal(expectedRow, piece.InitialCellRow);
+            Assert.Equal(expectedColumn, piece.InitialCell.Column);
+            Assert.Equal(expectedRow, piece.InitialCell.Row);
         }
 
         [Theory]
@@ -140,8 +140,8 @@ namespace ChessMoves.Tests
 
             //Assert
             Assert.Equal(expectedName, piece.Name);
-            Assert.Equal(expectedColumn, piece.InitialCellColumn);
-            Assert.Equal(expectedRow, piece.InitialCellRow);
+            Assert.Equal(expectedColumn, piece.InitialCell.Column);
+            Assert.Equal(expectedRow, piece.InitialCell.Row);
         }
 
 
