@@ -12,6 +12,14 @@ namespace ChessMoves
     {
         public static void Main(string[] args)
         {
+            string userInput;
+            Initializer.Initialize();
+
+            Console.WriteLine("Enter the input");
+            userInput = Console.ReadLine();
+            
+            ChessPiece givenPiece = new ChessPiece();
+            givenPiece.MapUserInputToChessPiece(userInput);
 
         }
     }

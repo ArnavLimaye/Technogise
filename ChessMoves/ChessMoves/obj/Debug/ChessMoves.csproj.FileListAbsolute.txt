@@ -3,3 +3,4 @@ F:\BackToIT\Technogise\ChessMoves\ChessMoves\bin\Debug\ChessMoves.exe
 F:\BackToIT\Technogise\ChessMoves\ChessMoves\bin\Debug\ChessMoves.pdb
 F:\BackToIT\Technogise\ChessMoves\ChessMoves\obj\Debug\ChessMoves.exe
 F:\BackToIT\Technogise\ChessMoves\ChessMoves\obj\Debug\ChessMoves.pdb
+F:\BackToIT\Technogise\ChessMoves\ChessMoves\obj\Debug\ChessMoves.csprojAssemblyReference.cache
