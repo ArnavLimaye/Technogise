@@ -240,7 +240,20 @@ namespace ChessMoves
 
         internal void GetSpecialMoves()
         {
-            throw new NotImplementedException();
+            int initialRow = initialCell.row;
+            int initialColumn = initialCell.column;
+
+            AddCell(initialRow + 1, initialColumn + 2);
+            AddCell(initialRow + 1, initialColumn - 2);
+
+            AddCell(initialRow - 1, initialColumn + 2);
+            AddCell(initialRow - 1, initialColumn - 2);
+
+            AddCell(initialRow + 2, initialColumn + 1);
+            AddCell(initialRow - 2, initialColumn + 1);
+
+            AddCell(initialRow + 2, initialColumn - 1);
+            AddCell(initialRow - 2, initialColumn - 1);
         }
     }
 }
