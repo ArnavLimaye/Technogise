@@ -15,9 +15,9 @@ namespace ChessMoves
 
         private List<MoveTypes> _allowedMoveTypes;
 
-        private Cell _initialCell;
+        internal Cell initialCell;
 
-        private List<Cell> _allowedCells;
+        internal List<Cell> allowedCells;
 
         public enum MoveTypes { Horizontal = 1, Vertical, Diagonal, Special, SingleCell, MultiCell }    //Special is for Knight's movement
         
@@ -25,10 +25,7 @@ namespace ChessMoves
 
         public List<MoveTypes> AllowedMoveTypes { get { return _allowedMoveTypes; } set { _allowedMoveTypes = value; } }
 
-        public Cell InitialCell { get { return _initialCell; } set { _initialCell = InitialCell; } }
-
-        public List<Cell> AllowedCells { get { return _allowedCells; } set { _allowedCells = value; } }
-
+        
         internal void MapUserInputToChessPiece(string userInput)
         {
             string[] nameAndCell = userInput.Split(' ');
@@ -69,15 +66,10 @@ namespace ChessMoves
 
             int initialColumn = Initializer.columnNameToNumberMap[columnChar.ToString()];
             int initialRow = Initializer.rowNameToNumberMap[rowChar.ToString()];
-            if (InitialCell == null)
-            {
-                InitialCell = new Cell() { Row = initialRow, Column = initialColumn };
-            }
-            else
-            {
-                InitialCell.Column = Initializer.columnNameToNumberMap[columnChar.ToString()];
-                InitialCell.Row = Initializer.rowNameToNumberMap[rowChar.ToString()];
-            }
+            
+            initialCell.column = initialColumn;
+            initialCell.row = initialRow;
+            
         }
     }
 }

@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 [assembly: InternalsVisibleTo("ChessMoves.Tests")]
 namespace ChessMoves
 {
-    internal class Cell
+    internal struct Cell
     {
-        private int _row;
-        private int _column;
-
-        public int Row { get { return _row; } set { _row = value; } }
-
-        public int Column { get { return _column; } set { _column = value; } }
+        internal int row;
+        internal int column;
     }
 }
