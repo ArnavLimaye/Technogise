@@ -72,6 +72,15 @@ namespace ChessMoves
             
         }
 
+        private void AddCell(int row, int column)
+        {
+            if (row < 1 || row > 8 || column < 1 || column > 8)
+                return;
+            if (allowedCells == null)
+                allowedCells = new List<Cell>();
+            allowedCells.Add(new Cell { row = row, column = column });
+        }
+
         internal void GetAllPossibleMoves()
         {
             if (AllowedMoveTypes.Contains(MoveTypes.Diagonal))
@@ -158,14 +167,7 @@ namespace ChessMoves
             AddCell(initialCell.row + 1, initialCell.column - 1);
         }
 
-        private void AddCell(int row, int column)
-        {
-            if (row < 1 || row > 8 || column < 1 || column > 8)
-                return;
-            if (allowedCells == null)
-                allowedCells = new List<Cell>();
-            allowedCells.Add(new Cell { row = row, column = column });
-        }
+        
 
         private bool CheckIfPieceIsForwardOnly(List<MoveTypes> allowedMoveTypes)
         {
@@ -184,7 +186,34 @@ namespace ChessMoves
 
         internal void GetAllPossibleVerticalMoves()
         {
-            throw new NotImplementedException();
+            bool isSingleMove = CheckIfPieceIsSingleMovePiece(AllowedMoveTypes);
+            if(isSingleMove)
+            {
+                GetAllAdjacentVerticalCells(AllowedMoveTypes);
+            }
+            else
+            {
+                int i = 1;
+                while (i < 9)
+                {
+                    if(initialCell.row != i) //Exclude initial cell
+                    {
+                        AddCell(i, initialCell.column);
+                    }
+                    i++;
+                }
+            }
+        }
+
+        private void GetAllAdjacentVerticalCells(List<MoveTypes> allowedMoveTypes)
+        {
+            bool isForwardOnly = CheckIfPieceIsForwardOnly(allowedMoveTypes);
+
+            if(!isForwardOnly)
+            {
+                AddCell(initialCell.row - 1, initialCell.column);
+            }
+            AddCell(initialCell.row + 1, initialCell.column);
         }
 
         internal void GetSpecialMoves()

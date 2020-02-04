@@ -194,7 +194,7 @@ namespace ChessMoves.Tests
             piece.GetAllPossibleMoves();
 
             //Assert
-            Assert.True(piece.allowedCells.Count == 0);
+            Assert.Null(piece.allowedCells);
         }
 
         [Fact]
