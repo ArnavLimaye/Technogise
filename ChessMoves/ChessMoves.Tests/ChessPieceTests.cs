@@ -264,7 +264,7 @@ namespace ChessMoves.Tests
         public void AllPossibleSpecialMovesShouldBeReturnedByGetSpecialMovesMethod()
         {
             //Arrange
-            string input = "Knight G7";
+            string input = "Horse G7";
             var expectedCells = new List<Cell> { new Cell { row = 5,column = 8}, new Cell { row = 5, column = 6 },
                 new Cell { row = 8,column = 5},new Cell { row = 6,column = 5}};
 
@@ -276,6 +276,36 @@ namespace ChessMoves.Tests
             //Assert
             var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
             Assert.True(cellsAreEquivalent);
+        }
+
+        [Theory]
+        [InlineData("King D5", "D6,E6,E5,E4,D4,C4,C5,C6")]
+        [InlineData("Horse E3", "F5,G4,G2,F1,D1,C2,C4,D5")]
+        public void TestCasesGivenInTheProblemDocumentShouldPassSuccessfully(string input,string output)
+        {
+            //Arrange
+            List<string> expectedOutputCells = new List<string>(output.Split(','));
+            ChessPiece piece = new ChessPiece();
+            
+
+            //Act
+            piece.MapUserInputToChessPiece(input);
+            piece.GetAllPossibleMoves(chessBoard);
+            List<string> actualOutputCells = CreateStringsFromCells(piece.allowedCells);
+
+            //Assert
+            var cellsAreEquivalent = expectedOutputCells.All(actualOutputCells.Contains) && expectedOutputCells.Count == actualOutputCells.Count;
+            Assert.True(cellsAreEquivalent);
+        }
+
+        private List<string> CreateStringsFromCells(List<Cell> allowedCells)
+        {
+            List<string> cellsStrings = new List<string>();
+            foreach(Cell cell in allowedCells)
+            {
+                cellsStrings.Add(Initializer.columnNumberToNameMap[cell.column] + Initializer.rowNumberToNameMap[cell.row]);
+            }
+            return cellsStrings;
         }
     }
 }

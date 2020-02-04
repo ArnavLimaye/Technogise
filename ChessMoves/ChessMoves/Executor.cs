@@ -33,6 +33,8 @@ namespace ChessMoves
 
         private static string CreateDisplayStringFromCells(List<Cell> allowedCells)
         {
+            if (allowedCells == null || allowedCells.Count == 0)
+                return "There are no possible moves for the given piece from given cell";
             string output = "";
             for(int i=0;i<allowedCells.Count;i++)
             {
