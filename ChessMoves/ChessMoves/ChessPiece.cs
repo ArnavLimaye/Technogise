@@ -15,13 +15,9 @@ namespace ChessMoves
 
         private List<MoveTypes> _allowedMoveTypes;
 
-        private int _initialCellRow;
+        internal Cell initialCell;
 
-        private int _initialCellColumn;
-
-        private List<int> _allowedRows;
-
-        private List<int> _allowedColumns;
+        internal List<Cell> allowedCells;
 
         public enum MoveTypes { Horizontal = 1, Vertical, Diagonal, Special, SingleCell, MultiCell }    //Special is for Knight's movement
         
@@ -29,14 +25,7 @@ namespace ChessMoves
 
         public List<MoveTypes> AllowedMoveTypes { get { return _allowedMoveTypes; } set { _allowedMoveTypes = value; } }
 
-        public int InitialCellRow { get { return _initialCellRow; } set { _initialCellRow = value; } }
-
-        public int InitialCellColumn { get { return _initialCellColumn; } set {_initialCellColumn = value; } }
-
-        public List<int> AllowedRows { get { return _allowedRows; } set { _allowedRows = value; } }
-
-        public List<int> AllowedColumns { get { return _allowedColumns; } set { _allowedColumns = value; } }
-
+        
         internal void MapUserInputToChessPiece(string userInput)
         {
             string[] nameAndCell = userInput.Split(' ');
@@ -75,8 +64,12 @@ namespace ChessMoves
             if (!Initializer.rowNameToNumberMap.ContainsKey(rowChar.ToString()))
                 throw new ArgumentException("Invalid row number");
 
-            InitialCellColumn = Initializer.columnNameToNumberMap[columnChar.ToString()];
-            InitialCellRow = Initializer.rowNameToNumberMap[rowChar.ToString()];
+            int initialColumn = Initializer.columnNameToNumberMap[columnChar.ToString()];
+            int initialRow = Initializer.rowNameToNumberMap[rowChar.ToString()];
+            
+            initialCell.column = initialColumn;
+            initialCell.row = initialRow;
+            
         }
     }
 }
