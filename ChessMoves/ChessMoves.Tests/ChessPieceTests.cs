@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using static ChessMoves.ChessBoard;
+using FluentAssertions;
 using static ChessMoves.ChessPiece;
 
 namespace ChessMoves.Tests
@@ -144,6 +144,24 @@ namespace ChessMoves.Tests
             Assert.Equal(expectedRow, piece.initialCell.row);
         }
 
+        [Theory]
+        [InlineData("King C4")]
+        public void AllPossibleMovesShouldBeReturnedAfterGivingInitialCellAndChessPiece(string userInput)
+        {
+            //Arrnage
+            var expectedCells = new List<Cell>() { new Cell { row = 4,column = 5}, new Cell { row = 4, column = 4 },
+            new Cell { row = 4,column = 3},new Cell { row = 3,column = 5},new Cell { row = 3,column = 6},new Cell { row = 2,column = 3}
+            ,new Cell { row = 2,column = 4},new Cell { row = 2,column = 5}};
 
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputToChessPiece(userInput);
+            List<Cell> actualCells = piece.GetAllPossibleMoves();
+
+            //Assert
+            var cellsAreEquivalent = expectedCells.All(actualCells.Contains) && expectedCells.Count == actualCells.Count;
+
+            Assert.True(cellsAreEquivalent);
+        }
     }
 }

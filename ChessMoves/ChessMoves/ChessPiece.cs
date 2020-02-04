@@ -71,5 +71,11 @@ namespace ChessMoves
             initialCell.row = initialRow;
             
         }
+
+        internal List<Cell> GetAllPossibleMoves()
+        {
+
+            throw new NotImplementedException();
+        }
     }
 }
