@@ -3,7 +3,6 @@ F:\BackToIT\Technogise\ChessMoves\ChessMoves\bin\Debug\ChessMoves.exe
 F:\BackToIT\Technogise\ChessMoves\ChessMoves\bin\Debug\ChessMoves.pdb
 F:\BackToIT\Technogise\ChessMoves\ChessMoves\bin\Debug\Newtonsoft.Json.dll
 F:\BackToIT\Technogise\ChessMoves\ChessMoves\bin\Debug\Newtonsoft.Json.xml
-F:\BackToIT\Technogise\ChessMoves\ChessMoves\obj\Debug\ChessMoves.csprojAssemblyReference.cache
 F:\BackToIT\Technogise\ChessMoves\ChessMoves\obj\Debug\ChessMoves.csproj.CopyComplete
 F:\BackToIT\Technogise\ChessMoves\ChessMoves\obj\Debug\ChessMoves.exe
 F:\BackToIT\Technogise\ChessMoves\ChessMoves\obj\Debug\ChessMoves.pdb

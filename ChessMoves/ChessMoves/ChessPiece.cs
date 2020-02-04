@@ -181,7 +181,29 @@ namespace ChessMoves
 
         internal void GetAllPossibleHorizontalMoves()
         {
-            throw new NotImplementedException();
+            bool isSingleMove = CheckIfPieceIsSingleMovePiece(AllowedMoveTypes);
+            if (isSingleMove)
+            {
+                GetAllAdjacentHorizontalCells();
+            }
+            else
+            {
+                int j = 1;
+                while(j < 9)
+                {
+                    if(j != initialCell.column)
+                    {
+                        AddCell(initialCell.row, j);
+                    }
+                    j++;
+                }
+            }
+        }
+
+        private void GetAllAdjacentHorizontalCells()
+        {
+            AddCell(initialCell.row, initialCell.column + 1);
+            AddCell(initialCell.row, initialCell.column - 1);
         }
 
         internal void GetAllPossibleVerticalMoves()
