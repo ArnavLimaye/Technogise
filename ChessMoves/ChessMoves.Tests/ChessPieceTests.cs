@@ -148,10 +148,14 @@ namespace ChessMoves.Tests
         public void AllPossibleMovesShouldBeReturnedAfterGivingInitialCellAndChessPiece()
         {
             //Arrnage
-            var userInput = "King C4";
-            var expectedCells = new List<Cell>() { new Cell { row = 4,column = 5}, new Cell { row = 4, column = 4 },
-            new Cell { row = 4,column = 3},new Cell { row = 3,column = 5},new Cell { row = 3,column = 6},new Cell { row = 2,column = 3}
-            ,new Cell { row = 2,column = 4},new Cell { row = 2,column = 5}};
+            var userInput = "Queen B2";
+            var expectedCells = new List<Cell>() { new Cell { row = 2,column = 1}, new Cell { row = 2, column = 3 },
+            new Cell { row = 2,column = 4},new Cell { row = 2,column = 5},new Cell { row = 2,column = 6},new Cell { row = 2,column = 7}
+            ,new Cell { row = 2,column = 8},new Cell { row = 1,column = 2},new Cell { row = 3,column = 2},new Cell { row = 4,column = 2}
+            ,new Cell { row = 5,column = 2},new Cell { row = 6,column = 2},new Cell { row = 7,column = 2},new Cell { row = 8,column = 2}
+            ,new Cell { row = 3,column = 1},new Cell { row = 1,column = 3},new Cell { row = 1,column = 1},new Cell { row = 3,column = 3}
+            ,new Cell { row = 4,column = 4},new Cell { row = 5,column = 5},new Cell { row = 6,column = 6},new Cell { row = 7,column = 7}
+            ,new Cell { row = 8,column = 8}};
 
             //Act
             ChessPiece piece = new ChessPiece();
