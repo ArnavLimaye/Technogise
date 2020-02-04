@@ -36,5 +36,20 @@ namespace ChessMoves
         public List<int> AllowedRows { get { return _allowedRows; } set { _allowedRows = value; } }
 
         public List<int> AllowedColumns { get { return _allowedColumns; } set { _allowedColumns = value; } }
+
+        internal void MapUserInputToChessPiece(string userInput)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void MapUserInputNameToChessPieceName(string userInputName)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void MapUserInputCellToChessPieceInitialRowColumn(string userInputCell)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

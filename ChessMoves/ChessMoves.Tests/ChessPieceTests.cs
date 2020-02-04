@@ -38,5 +38,49 @@ namespace ChessMoves.Tests
             Assert.Equal(expectedInitialColumn, piece.InitialCellColumn);
             Assert.Equal(expectedInitialRow, piece.InitialCellRow);
         }
+
+        [Fact]
+        public void InvalidArgumentExceptionShouldBeThrownIfUserGivesInputWithoutSpace()
+        {
+            //Arrange
+
+            //Act
+            string userInput = "RookB6";
+            ChessPiece piece = new ChessPiece();
+
+
+            //Assert
+            Assert.Throws< ArgumentException>("userInput", () => piece.MapUserInputToChessPiece(userInput));
+        }
+
+        [Fact]
+        public void InvalidArgumentExceptionShouldBeThrownIfUserInputsInvalidName()
+        {
+            //Arrange
+
+            //Act
+            string userInputName = "Camel";
+            ChessPiece piece = new ChessPiece();
+
+
+            //Assert
+            Assert.Throws<ArgumentException>("userInputName", () => piece.MapUserInputNameToChessPieceName(userInputName));
+        }
+
+        [Theory]
+        [InlineData("I6")]
+        [InlineData("H9")]
+        public void InvalidArgumentExceptionShouldBeThrownIfUserInputsInvalidCell(string cell)
+        {
+            //Arrange
+
+            //Act
+            string userInputCell = cell;
+            ChessPiece piece = new ChessPiece();
+
+
+            //Assert
+            Assert.Throws<ArgumentException>("userInputCell", () => piece.MapUserInputCellToChessPieceInitialRowColumn(userInputCell));
+        }
     }
 }

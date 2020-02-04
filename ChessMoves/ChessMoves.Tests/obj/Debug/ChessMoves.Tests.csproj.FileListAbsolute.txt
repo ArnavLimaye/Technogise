@@ -17,3 +17,4 @@ F:\BackToIT\Technogise\ChessMoves\ChessMoves.Tests\obj\Debug\ChessMoves.Tests.cs
 F:\BackToIT\Technogise\ChessMoves\ChessMoves.Tests\obj\Debug\ChessMoves.Tests.csproj.CopyComplete
 F:\BackToIT\Technogise\ChessMoves\ChessMoves.Tests\obj\Debug\ChessMoves.Tests.dll
 F:\BackToIT\Technogise\ChessMoves\ChessMoves.Tests\obj\Debug\ChessMoves.Tests.pdb
+F:\BackToIT\Technogise\ChessMoves\ChessMoves.Tests\bin\Debug\xunit.runner.json
