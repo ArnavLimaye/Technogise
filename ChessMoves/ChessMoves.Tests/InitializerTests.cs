@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ChessMoves.Tests
 {
-    class InitializerTests
+    public class InitializerTests
     {
+
     }
 }
