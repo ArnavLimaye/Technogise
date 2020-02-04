@@ -39,17 +39,44 @@ namespace ChessMoves
 
         internal void MapUserInputToChessPiece(string userInput)
         {
-            throw new NotImplementedException();
+            string[] nameAndCell = userInput.Split(' ');
+            if(nameAndCell.Length != 2)
+            {
+                throw new ArgumentException("Invalid Input");
+            }
+            
+            MapUserInputNameToChessPieceNameAndPieceMoveType(nameAndCell[0]);
+            
+            MapUserInputCellToChessPieceInitialRowColumn(nameAndCell[1]);
         }
 
-        internal void MapUserInputNameToChessPieceName(string userInputName)
+        internal void MapUserInputNameToChessPieceNameAndPieceMoveType(string userInputName)
         {
-            throw new NotImplementedException();
+            if (!Initializer.pieceNameToPieceMoveMap.ContainsKey(userInputName))
+                throw new ArgumentException("Piece Name is not known");
+            else
+            {
+                Name = userInputName;
+                AllowedMoveTypes = Initializer.pieceNameToPieceMoveMap[userInputName];
+            }
         }
 
         internal void MapUserInputCellToChessPieceInitialRowColumn(string userInputCell)
         {
-            throw new NotImplementedException();
+            if (userInputCell.Length != 2)
+                throw new ArgumentException("Invalid Cell number");
+
+            char columnChar = userInputCell[0];
+            char rowChar = userInputCell[1];
+
+            if (!Initializer.columnNameToNumberMap.ContainsKey(columnChar.ToString()))
+                throw new ArgumentException("Invalid Column Name");
+
+            if (!Initializer.rowNameToNumberMap.ContainsKey(rowChar.ToString()))
+                throw new ArgumentException("Invalid row number");
+
+            InitialCellColumn = Initializer.columnNameToNumberMap[columnChar.ToString()];
+            InitialCellRow = Initializer.rowNameToNumberMap[rowChar.ToString()];
         }
     }
 }

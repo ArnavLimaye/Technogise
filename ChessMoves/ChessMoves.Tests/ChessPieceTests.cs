@@ -11,6 +11,12 @@ namespace ChessMoves.Tests
 {
     public class ChessPieceTests
     {
+        //Writing a constructor to call initialize method of Initializer
+        public ChessPieceTests()
+        {
+            Initializer.Initialize();
+        }
+
         [Fact]
         public void ChessPiecePropertiesShouldGetAndSetProperly()
         {
@@ -50,7 +56,7 @@ namespace ChessMoves.Tests
 
 
             //Assert
-            Assert.Throws< ArgumentException>("userInput", () => piece.MapUserInputToChessPiece(userInput));
+            Assert.Throws< ArgumentException>(() => piece.MapUserInputToChessPiece(userInput));
         }
 
         [Fact]
@@ -64,12 +70,15 @@ namespace ChessMoves.Tests
 
 
             //Assert
-            Assert.Throws<ArgumentException>("userInputName", () => piece.MapUserInputNameToChessPieceName(userInputName));
+            Assert.Throws<ArgumentException>(() => piece.MapUserInputNameToChessPieceNameAndPieceMoveType(userInputName));
         }
 
         [Theory]
         [InlineData("I6")]
         [InlineData("H9")]
+        [InlineData("6B")]
+        [InlineData("BB")]
+        [InlineData("66")]
         public void InvalidArgumentExceptionShouldBeThrownIfUserInputsInvalidCell(string cell)
         {
             //Arrange
@@ -79,22 +88,24 @@ namespace ChessMoves.Tests
             ChessPiece piece = new ChessPiece();
 
             //Assert
-            Assert.Throws<ArgumentException>("userInputCell", () => piece.MapUserInputCellToChessPieceInitialRowColumn(userInputCell));
+            Assert.Throws<ArgumentException>(() => piece.MapUserInputCellToChessPieceInitialRowColumn(userInputCell));
         }
 
         [Theory]
         [InlineData("Bishop")]
-        public void ValidPieceNameShouldSetChessPieceNameRightly(string pieceName)
+        public void ValidPieceNameShouldSetChessPieceNameAndAllowedMoveTypesRightly(string pieceName)
         {
             //Arrange
             string expected = pieceName;
+            List<MoveTypes> expectedMoveTypes = Initializer.pieceNameToPieceMoveMap[pieceName];
 
             //Act
             ChessPiece piece = new ChessPiece();
-            piece.MapUserInputNameToChessPieceName(pieceName);
+            piece.MapUserInputNameToChessPieceNameAndPieceMoveType(pieceName);
 
             //Assert
             Assert.Equal(expected, piece.Name);
+            Assert.Equal(expectedMoveTypes, piece.AllowedMoveTypes);
         }
 
         [Theory]
