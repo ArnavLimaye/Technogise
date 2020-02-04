@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using static ChessMoves.ChessBoard;
+using static ChessMoves.ChessPiece;
 
+[assembly: InternalsVisibleTo("ChessMoves.Tests")]
 namespace ChessMoves
 {
     //To initialize the chessboard and chess pieces according to default rules
