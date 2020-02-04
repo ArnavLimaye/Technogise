@@ -78,9 +78,61 @@ namespace ChessMoves.Tests
             string userInputCell = cell;
             ChessPiece piece = new ChessPiece();
 
-
             //Assert
             Assert.Throws<ArgumentException>("userInputCell", () => piece.MapUserInputCellToChessPieceInitialRowColumn(userInputCell));
         }
+
+        [Theory]
+        [InlineData("Bishop")]
+        public void ValidPieceNameShouldSetChessPieceNameRightly(string pieceName)
+        {
+            //Arrange
+            string expected = pieceName;
+
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputNameToChessPieceName(pieceName);
+
+            //Assert
+            Assert.Equal(expected, piece.Name);
+        }
+
+        [Theory]
+        [InlineData("B6")]
+        public void ValidCellShouldSetChessPieceCellRowAndCellColumnPropertiesRightly(string inputCell)
+        {
+            //Arrange
+            int expectedColumn = 2;
+            int expectedRow = 6;
+
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputCellToChessPieceInitialRowColumn(inputCell);
+
+            //Assert
+            Assert.Equal(expectedColumn, piece.InitialCellColumn);
+            Assert.Equal(expectedRow, piece.InitialCellRow);
+        }
+
+        [Theory]
+        [InlineData("Rook B6")]
+        public void ValidInputShouldBeMappedToChessPieceRightly(string userInput)
+        {
+            //Arrange
+            string expectedName = "Rook";
+            int expectedColumn = 2;
+            int expectedRow = 6;
+
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputToChessPiece(userInput);
+
+            //Assert
+            Assert.Equal(expectedName, piece.Name);
+            Assert.Equal(expectedColumn, piece.InitialCellColumn);
+            Assert.Equal(expectedRow, piece.InitialCellRow);
+        }
+
+
     }
 }
