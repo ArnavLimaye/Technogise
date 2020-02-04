@@ -174,7 +174,7 @@ namespace ChessMoves.Tests
         {
             //Arrange
             string userInput = "Pawn C6";
-            var expectedCells = new List<Cell> { new Cell { row = 6, column = 3 } };
+            var expectedCells = new List<Cell> { new Cell { row = 7, column = 3 } };
 
             //Act
             ChessPiece piece = new ChessPiece();
