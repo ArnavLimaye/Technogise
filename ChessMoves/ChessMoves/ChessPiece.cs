@@ -19,7 +19,7 @@ namespace ChessMoves
 
         internal List<Cell> allowedCells;
 
-        public enum MoveTypes { Horizontal = 1, Vertical, Diagonal, Special, SingleCell, MultiCell }    //Special is for Knight's movement
+        public enum MoveTypes { Horizontal = 1, Vertical, Diagonal, Special, SingleCell, MultiCell, OnlyForward }    //Special is for Knight's movement
         
         public string Name { get { return _name; } set { _name = value; } }
 
@@ -72,9 +72,29 @@ namespace ChessMoves
             
         }
 
-        internal List<Cell> GetAllPossibleMoves()
+        internal void GetAllPossibleMoves()
         {
 
+            throw new NotImplementedException();
+        }
+
+        internal void GetDiagonalMoves()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void GetHorizontalMoves()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void GetVerticalMoves()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void GetSpecialMoves()
+        {
             throw new NotImplementedException();
         }
     }
