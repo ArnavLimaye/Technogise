@@ -22,6 +22,24 @@ namespace ChessMoves
             givenPiece.MapUserInputToChessPiece(userInput);
 
             givenPiece.GetAllPossibleMoves();
+
+            string outputString = CreateDisplayStringFromCells(givenPiece.allowedCells);
+
+            Console.WriteLine(outputString);
+            Console.ReadKey();
+        }
+
+        private static string CreateDisplayStringFromCells(List<Cell> allowedCells)
+        {
+            string output = "";
+            for(int i=0;i<allowedCells.Count;i++)
+            {
+                output += Initializer.columnNumberToNameMap[allowedCells[i].column];
+                output += Initializer.rowNumberToNameMap[allowedCells[i].row];
+                if(i < allowedCells.Count - 1)
+                    output += ",";
+            }
+            return output;
         }
     }
 }
