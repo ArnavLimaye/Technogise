@@ -21,6 +21,7 @@ namespace ChessMoves
             ChessPiece givenPiece = new ChessPiece();
             givenPiece.MapUserInputToChessPiece(userInput);
 
+            givenPiece.GetAllPossibleMoves();
         }
     }
 }

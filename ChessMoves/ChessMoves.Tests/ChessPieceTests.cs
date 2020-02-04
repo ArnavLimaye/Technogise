@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using static ChessMoves.ChessBoard;
+using FluentAssertions;
 using static ChessMoves.ChessPiece;
 
 namespace ChessMoves.Tests
@@ -144,6 +144,133 @@ namespace ChessMoves.Tests
             Assert.Equal(expectedRow, piece.initialCell.row);
         }
 
+        [Fact]
+        public void AllPossibleMovesShouldBeReturnedAfterGivingInitialCellAndChessPiece()
+        {
+            //Arrnage
+            var userInput = "King C4";
+            var expectedCells = new List<Cell>() { new Cell { row = 4,column = 5}, new Cell { row = 4, column = 4 },
+            new Cell { row = 4,column = 3},new Cell { row = 3,column = 5},new Cell { row = 3,column = 6},new Cell { row = 2,column = 3}
+            ,new Cell { row = 2,column = 4},new Cell { row = 2,column = 5}};
 
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputToChessPiece(userInput);
+            piece.GetAllPossibleMoves();
+
+            //Assert
+            var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
+
+            Assert.True(cellsAreEquivalent);
+        }
+
+
+        [Fact]
+        public void OnlyAdjacentMovesShouldBeReturnedIfPawnOrKingIsGiven()
+        {
+            //Arrange
+            string userInput = "Pawn C6";
+            var expectedCells = new List<Cell> { new Cell { row = 6, column = 3 } };
+
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputToChessPiece(userInput);
+            piece.GetAllPossibleMoves();
+
+            //Assert
+            var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
+            Assert.True(cellsAreEquivalent);
+        }
+
+        [Fact]
+        public void NoMovesShouldBeReturnedIfPawnIsAtTopmostRow()
+        {
+            //Arrange
+            string userInput = "Pawn D8";
+
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputToChessPiece(userInput);
+            piece.GetAllPossibleMoves();
+
+            //Assert
+            Assert.True(piece.allowedCells.Count == 0);
+        }
+
+        [Fact]
+        public void AllDiagonalPossibleMovesShouldBeReturnedByGetDiagonalMovesMethod()
+        {
+            //Arrange
+            string input = "Bishop G7";
+            var expectedCells = new List<Cell> { new Cell { row = 8,column = 8},new Cell { row = 6,column = 6},
+                new Cell { row = 5,column = 5},new Cell { row = 4, column = 4}, new Cell { row = 3, column = 3},
+                new Cell { row = 2,column =2},new Cell{ row= 1,column = 1},new Cell{ row = 8,column=6},new Cell{ row = 6,column = 8} };
+
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputToChessPiece(input);
+            piece.GetDiagonalMoves();
+
+            //Assert
+            var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
+
+            Assert.True(cellsAreEquivalent);
+        }
+
+        [Fact]
+        public void AllPossibleHorizontalMovesShouldBeReturnedByGetHorizontalMovesMethod()
+        {
+            //Arrange
+            string input = "Rook G7";
+            var expectedCells = new List<Cell> { new Cell { row = 7,column = 1}, new Cell { row = 7, column = 2 },
+                new Cell { row = 7,column = 3}, new Cell { row = 7,column = 4},new Cell { row = 7,column = 5},new Cell { row = 7,column = 6},
+                new Cell { row = 7,column = 8}};
+
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputToChessPiece(input);
+            piece.GetHorizontalMoves();
+
+            //Assert
+            var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
+            Assert.True(cellsAreEquivalent);
+        }
+
+        [Fact]
+        public void AllPossibleVerticalMovesShouldBeReturnedByGetVerticalMovesMethod()
+        {
+            //Arrange
+            string input = "Rook G7";
+            var expectedCells = new List<Cell> { new Cell { row = 1,column = 7}, new Cell { row = 2, column = 7 },
+                new Cell { row = 3,column = 7},new Cell { row = 4,column = 7},new Cell { row = 5,column = 7},new Cell { row = 6,column = 7}
+                ,new Cell { row = 8,column = 7}};
+
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputToChessPiece(input);
+            piece.GetVerticalMoves();
+
+            //Assert
+            var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
+            Assert.True(cellsAreEquivalent);
+        }
+
+        [Fact]
+        public void AllPossibleSpecialMovesShouldBeReturnedByGetSpecialMovesMethod()
+        {
+            //Arrange
+            string input = "Knight G7";
+            var expectedCells = new List<Cell> { new Cell { row = 5,column = 8}, new Cell { row = 5, column = 6 },
+                new Cell { row = 8,column = 5},new Cell { row = 6,column = 5}};
+
+            //Act
+            ChessPiece piece = new ChessPiece();
+            piece.MapUserInputToChessPiece(input);
+            piece.GetSpecialMoves();
+
+            //Assert
+            var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
+            Assert.True(cellsAreEquivalent);
+        }
     }
 }
