@@ -74,21 +74,115 @@ namespace ChessMoves
 
         internal void GetAllPossibleMoves()
         {
-
-            throw new NotImplementedException();
+            if (AllowedMoveTypes.Contains(MoveTypes.Diagonal))
+            { 
+                GetAllPossibleDiagonalMoves(); 
+            }
+            
+            if (AllowedMoveTypes.Contains(MoveTypes.Vertical))
+            { 
+                GetAllPossibleVerticalMoves(); 
+            }
+            
+            if (AllowedMoveTypes.Contains(MoveTypes.Horizontal))
+            { 
+                GetAllPossibleHorizontalMoves(); 
+            }
+            
+            if (AllowedMoveTypes.Contains(MoveTypes.Special))
+            {
+                GetSpecialMoves();
+            }
         }
 
-        internal void GetDiagonalMoves()
+        internal void GetAllPossibleDiagonalMoves()
+        {
+            bool isSingleMove = CheckIfPieceIsSingleMovePiece(AllowedMoveTypes);
+            if (isSingleMove)
+            {
+                GetAllAdjacentDiagonalCells();
+            }
+            else
+            {
+                int i = initialCell.row + 1;
+                int j = initialCell.column + 1;
+                //Adding cells on NorthEast side
+                while(i<9 && j<9)
+                {
+                    AddCell(i, j);
+                    i++;
+                    j++;
+                }
+                
+                i = initialCell.row - 1;
+                j = initialCell.column - 1;
+                //Adding cells on SouthWest side
+                while (i>0 && j>0)
+                {
+                    AddCell(i, j);
+                    i--;
+                    j--;
+                }
+
+                i = initialCell.row + 1;
+                j = initialCell.column - 1;
+                //Adding cells on NorthWest side
+                while (i < 9 && j > 0)
+                {
+                    AddCell(i, j);
+                    i++;
+                    j--;
+                }
+
+                i = initialCell.row - 1;
+                j = initialCell.column + 1;
+                //Adding cells on SouthEast side
+                while (i > 0 && j < 9)
+                {
+                    AddCell(i, j);
+                    i--;
+                    j++;
+                }
+            }
+        }
+
+        private void GetAllAdjacentDiagonalCells()
+        {
+            bool isOnlyForward = CheckIfPieceIsForwardOnly(AllowedMoveTypes);
+            if(!isOnlyForward)
+            {
+                AddCell(initialCell.row - 1,initialCell.column + 1);
+                AddCell(initialCell.row - 1, initialCell.column - 1);
+            }
+            AddCell(initialCell.row + 1, initialCell.column + 1);
+            AddCell(initialCell.row + 1, initialCell.column - 1);
+        }
+
+        private void AddCell(int row, int column)
+        {
+            if (row < 1 || row > 8 || column < 1 || column > 8)
+                return;
+            if (allowedCells == null)
+                allowedCells = new List<Cell>();
+            allowedCells.Add(new Cell { row = row, column = column });
+        }
+
+        private bool CheckIfPieceIsForwardOnly(List<MoveTypes> allowedMoveTypes)
+        {
+            return allowedMoveTypes.Contains(MoveTypes.OnlyForward);
+        }
+
+        private bool CheckIfPieceIsSingleMovePiece(List<MoveTypes> allowedMoveTypes)
+        {
+            return allowedMoveTypes.Contains(MoveTypes.SingleCell);
+        }
+
+        internal void GetAllPossibleHorizontalMoves()
         {
             throw new NotImplementedException();
         }
 
-        internal void GetHorizontalMoves()
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void GetVerticalMoves()
+        internal void GetAllPossibleVerticalMoves()
         {
             throw new NotImplementedException();
         }

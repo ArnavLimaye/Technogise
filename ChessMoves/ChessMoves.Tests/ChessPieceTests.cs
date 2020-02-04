@@ -198,7 +198,7 @@ namespace ChessMoves.Tests
         }
 
         [Fact]
-        public void AllDiagonalPossibleMovesShouldBeReturnedByGetDiagonalMovesMethod()
+        public void AllPossibleDiagonalMovesShouldBeReturnedByGetDiagonalMovesMethod()
         {
             //Arrange
             string input = "Bishop G7";
@@ -209,7 +209,7 @@ namespace ChessMoves.Tests
             //Act
             ChessPiece piece = new ChessPiece();
             piece.MapUserInputToChessPiece(input);
-            piece.GetDiagonalMoves();
+            piece.GetAllPossibleDiagonalMoves();
 
             //Assert
             var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
@@ -229,7 +229,7 @@ namespace ChessMoves.Tests
             //Act
             ChessPiece piece = new ChessPiece();
             piece.MapUserInputToChessPiece(input);
-            piece.GetHorizontalMoves();
+            piece.GetAllPossibleHorizontalMoves();
 
             //Assert
             var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
@@ -248,7 +248,7 @@ namespace ChessMoves.Tests
             //Act
             ChessPiece piece = new ChessPiece();
             piece.MapUserInputToChessPiece(input);
-            piece.GetVerticalMoves();
+            piece.GetAllPossibleVerticalMoves();
 
             //Assert
             var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
