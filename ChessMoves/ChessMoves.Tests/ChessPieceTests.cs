@@ -12,6 +12,7 @@ namespace ChessMoves.Tests
 {
     public class ChessPieceTests
     {
+        ChessBoard chessBoard = new ChessBoard();
         //Writing a constructor to call initialize method of Initializer
         public ChessPieceTests()
         {
@@ -160,7 +161,7 @@ namespace ChessMoves.Tests
             //Act
             ChessPiece piece = new ChessPiece();
             piece.MapUserInputToChessPiece(userInput);
-            piece.GetAllPossibleMoves();
+            piece.GetAllPossibleMoves(chessBoard);
 
             //Assert
             var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
@@ -179,7 +180,7 @@ namespace ChessMoves.Tests
             //Act
             ChessPiece piece = new ChessPiece();
             piece.MapUserInputToChessPiece(userInput);
-            piece.GetAllPossibleMoves();
+            piece.GetAllPossibleMoves(chessBoard);
 
             //Assert
             var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
@@ -195,7 +196,7 @@ namespace ChessMoves.Tests
             //Act
             ChessPiece piece = new ChessPiece();
             piece.MapUserInputToChessPiece(userInput);
-            piece.GetAllPossibleMoves();
+            piece.GetAllPossibleMoves(chessBoard);
 
             //Assert
             Assert.Null(piece.allowedCells);
@@ -213,7 +214,7 @@ namespace ChessMoves.Tests
             //Act
             ChessPiece piece = new ChessPiece();
             piece.MapUserInputToChessPiece(input);
-            piece.GetAllPossibleDiagonalMoves();
+            piece.GetAllPossibleDiagonalMoves(chessBoard);
 
             //Assert
             var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
@@ -233,7 +234,7 @@ namespace ChessMoves.Tests
             //Act
             ChessPiece piece = new ChessPiece();
             piece.MapUserInputToChessPiece(input);
-            piece.GetAllPossibleHorizontalMoves();
+            piece.GetAllPossibleHorizontalMoves(chessBoard);
 
             //Assert
             var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
@@ -252,7 +253,7 @@ namespace ChessMoves.Tests
             //Act
             ChessPiece piece = new ChessPiece();
             piece.MapUserInputToChessPiece(input);
-            piece.GetAllPossibleVerticalMoves();
+            piece.GetAllPossibleVerticalMoves(chessBoard);
 
             //Assert
             var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;
@@ -270,7 +271,7 @@ namespace ChessMoves.Tests
             //Act
             ChessPiece piece = new ChessPiece();
             piece.MapUserInputToChessPiece(input);
-            piece.GetSpecialMoves();
+            piece.GetSpecialMoves(chessBoard);
 
             //Assert
             var cellsAreEquivalent = expectedCells.All(piece.allowedCells.Contains) && expectedCells.Count == piece.allowedCells.Count;

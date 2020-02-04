@@ -72,53 +72,53 @@ namespace ChessMoves
             
         }
 
-        private void AddCell(int row, int column)
+        private void AddCell(int row, int column, ChessBoard chessBoard)
         {
-            if (row < 1 || row > 8 || column < 1 || column > 8)
+            if (row < 1 || row > chessBoard.Rows || column < 1 || column > chessBoard.Columns)
                 return;
             if (allowedCells == null)
                 allowedCells = new List<Cell>();
             allowedCells.Add(new Cell { row = row, column = column });
         }
 
-        internal void GetAllPossibleMoves()
+        internal void GetAllPossibleMoves(ChessBoard chessBoard)
         {
             if (AllowedMoveTypes.Contains(MoveTypes.Diagonal))
             { 
-                GetAllPossibleDiagonalMoves(); 
+                GetAllPossibleDiagonalMoves(chessBoard); 
             }
             
             if (AllowedMoveTypes.Contains(MoveTypes.Vertical))
             { 
-                GetAllPossibleVerticalMoves(); 
+                GetAllPossibleVerticalMoves(chessBoard); 
             }
             
             if (AllowedMoveTypes.Contains(MoveTypes.Horizontal))
             { 
-                GetAllPossibleHorizontalMoves(); 
+                GetAllPossibleHorizontalMoves(chessBoard); 
             }
             
             if (AllowedMoveTypes.Contains(MoveTypes.Special))
             {
-                GetSpecialMoves();
+                GetSpecialMoves(chessBoard);
             }
         }
 
-        internal void GetAllPossibleDiagonalMoves()
+        internal void GetAllPossibleDiagonalMoves(ChessBoard chessBoard)
         {
             bool isSingleMove = CheckIfPieceIsSingleMovePiece(AllowedMoveTypes);
             if (isSingleMove)
             {
-                GetAllAdjacentDiagonalCells();
+                GetAllAdjacentDiagonalCells(chessBoard);
             }
             else
             {
                 int i = initialCell.row + 1;
                 int j = initialCell.column + 1;
                 //Adding cells on NorthEast side
-                while(i<9 && j<9)
+                while(i <= chessBoard.Rows && j <= chessBoard.Columns)
                 {
-                    AddCell(i, j);
+                    AddCell(i, j,chessBoard);
                     i++;
                     j++;
                 }
@@ -128,7 +128,7 @@ namespace ChessMoves
                 //Adding cells on SouthWest side
                 while (i>0 && j>0)
                 {
-                    AddCell(i, j);
+                    AddCell(i, j,chessBoard);
                     i--;
                     j--;
                 }
@@ -136,9 +136,9 @@ namespace ChessMoves
                 i = initialCell.row + 1;
                 j = initialCell.column - 1;
                 //Adding cells on NorthWest side
-                while (i < 9 && j > 0)
+                while (i <= chessBoard.Rows && j > 0)
                 {
-                    AddCell(i, j);
+                    AddCell(i, j,chessBoard);
                     i++;
                     j--;
                 }
@@ -146,25 +146,25 @@ namespace ChessMoves
                 i = initialCell.row - 1;
                 j = initialCell.column + 1;
                 //Adding cells on SouthEast side
-                while (i > 0 && j < 9)
+                while (i > 0 && j <= chessBoard.Columns)
                 {
-                    AddCell(i, j);
+                    AddCell(i, j,chessBoard);
                     i--;
                     j++;
                 }
             }
         }
 
-        private void GetAllAdjacentDiagonalCells()
+        private void GetAllAdjacentDiagonalCells(ChessBoard chessBoard)
         {
             bool isOnlyForward = CheckIfPieceIsForwardOnly(AllowedMoveTypes);
             if(!isOnlyForward)
             {
-                AddCell(initialCell.row - 1,initialCell.column + 1);
-                AddCell(initialCell.row - 1, initialCell.column - 1);
+                AddCell(initialCell.row - 1,initialCell.column + 1,chessBoard);
+                AddCell(initialCell.row - 1, initialCell.column - 1,chessBoard);
             }
-            AddCell(initialCell.row + 1, initialCell.column + 1);
-            AddCell(initialCell.row + 1, initialCell.column - 1);
+            AddCell(initialCell.row + 1, initialCell.column + 1,chessBoard);
+            AddCell(initialCell.row + 1, initialCell.column - 1,chessBoard);
         }
 
         
@@ -179,81 +179,78 @@ namespace ChessMoves
             return allowedMoveTypes.Contains(MoveTypes.SingleCell);
         }
 
-        internal void GetAllPossibleHorizontalMoves()
+        internal void GetAllPossibleHorizontalMoves(ChessBoard chessBoard)
         {
             bool isSingleMove = CheckIfPieceIsSingleMovePiece(AllowedMoveTypes);
             if (isSingleMove)
             {
-                GetAllAdjacentHorizontalCells();
+                GetAllAdjacentHorizontalCells(chessBoard);
             }
             else
             {
                 int j = 1;
-                while(j < 9)
+                while(j <= chessBoard.Columns)
                 {
                     if(j != initialCell.column)
                     {
-                        AddCell(initialCell.row, j);
+                        AddCell(initialCell.row, j,chessBoard);
                     }
                     j++;
                 }
             }
         }
 
-        private void GetAllAdjacentHorizontalCells()
+        private void GetAllAdjacentHorizontalCells(ChessBoard chessBoard)
         {
-            AddCell(initialCell.row, initialCell.column + 1);
-            AddCell(initialCell.row, initialCell.column - 1);
+            AddCell(initialCell.row, initialCell.column + 1,chessBoard);
+            AddCell(initialCell.row, initialCell.column - 1,chessBoard);
         }
 
-        internal void GetAllPossibleVerticalMoves()
+        internal void GetAllPossibleVerticalMoves(ChessBoard chessBoard)
         {
             bool isSingleMove = CheckIfPieceIsSingleMovePiece(AllowedMoveTypes);
             if(isSingleMove)
             {
-                GetAllAdjacentVerticalCells(AllowedMoveTypes);
+                GetAllAdjacentVerticalCells(AllowedMoveTypes,chessBoard);
             }
             else
             {
                 int i = 1;
-                while (i < 9)
+                while (i <= chessBoard.Rows)
                 {
                     if(initialCell.row != i) //Exclude initial cell
                     {
-                        AddCell(i, initialCell.column);
+                        AddCell(i, initialCell.column,chessBoard);
                     }
                     i++;
                 }
             }
         }
 
-        private void GetAllAdjacentVerticalCells(List<MoveTypes> allowedMoveTypes)
+        private void GetAllAdjacentVerticalCells(List<MoveTypes> allowedMoveTypes,ChessBoard chessBoard)
         {
             bool isForwardOnly = CheckIfPieceIsForwardOnly(allowedMoveTypes);
 
             if(!isForwardOnly)
             {
-                AddCell(initialCell.row - 1, initialCell.column);
+                AddCell(initialCell.row - 1, initialCell.column,chessBoard);
             }
-            AddCell(initialCell.row + 1, initialCell.column);
+            AddCell(initialCell.row + 1, initialCell.column,chessBoard);
         }
 
-        internal void GetSpecialMoves()
+        internal void GetSpecialMoves(ChessBoard chessBoard)
         {
             int initialRow = initialCell.row;
             int initialColumn = initialCell.column;
 
-            AddCell(initialRow + 1, initialColumn + 2);
-            AddCell(initialRow + 1, initialColumn - 2);
-
-            AddCell(initialRow - 1, initialColumn + 2);
-            AddCell(initialRow - 1, initialColumn - 2);
-
-            AddCell(initialRow + 2, initialColumn + 1);
-            AddCell(initialRow - 2, initialColumn + 1);
-
-            AddCell(initialRow + 2, initialColumn - 1);
-            AddCell(initialRow - 2, initialColumn - 1);
+            AddCell(initialRow + 1, initialColumn + 2,chessBoard);
+            AddCell(initialRow + 1, initialColumn - 2,chessBoard);
+            AddCell(initialRow - 1, initialColumn + 2,chessBoard);
+            AddCell(initialRow - 1, initialColumn - 2,chessBoard);
+            AddCell(initialRow + 2, initialColumn + 1,chessBoard);
+            AddCell(initialRow - 2, initialColumn + 1,chessBoard);
+            AddCell(initialRow + 2, initialColumn - 1,chessBoard);
+            AddCell(initialRow - 2, initialColumn - 1,chessBoard);
         }
     }
 }

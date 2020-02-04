@@ -18,10 +18,12 @@ namespace ChessMoves
             Console.WriteLine("Enter the input");
             userInput = Console.ReadLine();
             
+            ChessBoard chessBoard = new ChessBoard();
+            
             ChessPiece givenPiece = new ChessPiece();
             givenPiece.MapUserInputToChessPiece(userInput);
 
-            givenPiece.GetAllPossibleMoves();
+            givenPiece.GetAllPossibleMoves(chessBoard);
 
             string outputString = CreateDisplayStringFromCells(givenPiece.allowedCells);
 
