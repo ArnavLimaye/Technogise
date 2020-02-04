@@ -72,30 +72,188 @@ namespace ChessMoves
             
         }
 
+        private void AddCell(int row, int column)
+        {
+            if (row < 1 || row > 8 || column < 1 || column > 8)
+                return;
+            if (allowedCells == null)
+                allowedCells = new List<Cell>();
+            allowedCells.Add(new Cell { row = row, column = column });
+        }
+
         internal void GetAllPossibleMoves()
         {
-
-            throw new NotImplementedException();
+            if (AllowedMoveTypes.Contains(MoveTypes.Diagonal))
+            { 
+                GetAllPossibleDiagonalMoves(); 
+            }
+            
+            if (AllowedMoveTypes.Contains(MoveTypes.Vertical))
+            { 
+                GetAllPossibleVerticalMoves(); 
+            }
+            
+            if (AllowedMoveTypes.Contains(MoveTypes.Horizontal))
+            { 
+                GetAllPossibleHorizontalMoves(); 
+            }
+            
+            if (AllowedMoveTypes.Contains(MoveTypes.Special))
+            {
+                GetSpecialMoves();
+            }
         }
 
-        internal void GetDiagonalMoves()
+        internal void GetAllPossibleDiagonalMoves()
         {
-            throw new NotImplementedException();
+            bool isSingleMove = CheckIfPieceIsSingleMovePiece(AllowedMoveTypes);
+            if (isSingleMove)
+            {
+                GetAllAdjacentDiagonalCells();
+            }
+            else
+            {
+                int i = initialCell.row + 1;
+                int j = initialCell.column + 1;
+                //Adding cells on NorthEast side
+                while(i<9 && j<9)
+                {
+                    AddCell(i, j);
+                    i++;
+                    j++;
+                }
+                
+                i = initialCell.row - 1;
+                j = initialCell.column - 1;
+                //Adding cells on SouthWest side
+                while (i>0 && j>0)
+                {
+                    AddCell(i, j);
+                    i--;
+                    j--;
+                }
+
+                i = initialCell.row + 1;
+                j = initialCell.column - 1;
+                //Adding cells on NorthWest side
+                while (i < 9 && j > 0)
+                {
+                    AddCell(i, j);
+                    i++;
+                    j--;
+                }
+
+                i = initialCell.row - 1;
+                j = initialCell.column + 1;
+                //Adding cells on SouthEast side
+                while (i > 0 && j < 9)
+                {
+                    AddCell(i, j);
+                    i--;
+                    j++;
+                }
+            }
         }
 
-        internal void GetHorizontalMoves()
+        private void GetAllAdjacentDiagonalCells()
         {
-            throw new NotImplementedException();
+            bool isOnlyForward = CheckIfPieceIsForwardOnly(AllowedMoveTypes);
+            if(!isOnlyForward)
+            {
+                AddCell(initialCell.row - 1,initialCell.column + 1);
+                AddCell(initialCell.row - 1, initialCell.column - 1);
+            }
+            AddCell(initialCell.row + 1, initialCell.column + 1);
+            AddCell(initialCell.row + 1, initialCell.column - 1);
         }
 
-        internal void GetVerticalMoves()
+        
+
+        private bool CheckIfPieceIsForwardOnly(List<MoveTypes> allowedMoveTypes)
         {
-            throw new NotImplementedException();
+            return allowedMoveTypes.Contains(MoveTypes.OnlyForward);
+        }
+
+        private bool CheckIfPieceIsSingleMovePiece(List<MoveTypes> allowedMoveTypes)
+        {
+            return allowedMoveTypes.Contains(MoveTypes.SingleCell);
+        }
+
+        internal void GetAllPossibleHorizontalMoves()
+        {
+            bool isSingleMove = CheckIfPieceIsSingleMovePiece(AllowedMoveTypes);
+            if (isSingleMove)
+            {
+                GetAllAdjacentHorizontalCells();
+            }
+            else
+            {
+                int j = 1;
+                while(j < 9)
+                {
+                    if(j != initialCell.column)
+                    {
+                        AddCell(initialCell.row, j);
+                    }
+                    j++;
+                }
+            }
+        }
+
+        private void GetAllAdjacentHorizontalCells()
+        {
+            AddCell(initialCell.row, initialCell.column + 1);
+            AddCell(initialCell.row, initialCell.column - 1);
+        }
+
+        internal void GetAllPossibleVerticalMoves()
+        {
+            bool isSingleMove = CheckIfPieceIsSingleMovePiece(AllowedMoveTypes);
+            if(isSingleMove)
+            {
+                GetAllAdjacentVerticalCells(AllowedMoveTypes);
+            }
+            else
+            {
+                int i = 1;
+                while (i < 9)
+                {
+                    if(initialCell.row != i) //Exclude initial cell
+                    {
+                        AddCell(i, initialCell.column);
+                    }
+                    i++;
+                }
+            }
+        }
+
+        private void GetAllAdjacentVerticalCells(List<MoveTypes> allowedMoveTypes)
+        {
+            bool isForwardOnly = CheckIfPieceIsForwardOnly(allowedMoveTypes);
+
+            if(!isForwardOnly)
+            {
+                AddCell(initialCell.row - 1, initialCell.column);
+            }
+            AddCell(initialCell.row + 1, initialCell.column);
         }
 
         internal void GetSpecialMoves()
         {
-            throw new NotImplementedException();
+            int initialRow = initialCell.row;
+            int initialColumn = initialCell.column;
+
+            AddCell(initialRow + 1, initialColumn + 2);
+            AddCell(initialRow + 1, initialColumn - 2);
+
+            AddCell(initialRow - 1, initialColumn + 2);
+            AddCell(initialRow - 1, initialColumn - 2);
+
+            AddCell(initialRow + 2, initialColumn + 1);
+            AddCell(initialRow - 2, initialColumn + 1);
+
+            AddCell(initialRow + 2, initialColumn - 1);
+            AddCell(initialRow - 2, initialColumn - 1);
         }
     }
 }
