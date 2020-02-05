@@ -10,12 +10,7 @@ namespace ChessMoves.PieceClasses
     {
         internal override void SearchForAllPossibleMoves(ChessBoard chessBoard)
         {
-            SearchForAllPossibleAdjacentMovesOnly(chessBoard);
-        }
-
-        private void SearchForAllPossibleAdjacentMovesOnly(ChessBoard chessBoard)
-        {
-            throw new NotImplementedException();
+            SearchForAllPossibleAdjacentMoves(chessBoard);
         }
     }
 }

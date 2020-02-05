@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 [assembly: InternalsVisibleTo("ChessMoves.Tests")]
 namespace ChessMoves
 {
-    internal class NewExecutor
+    internal class Executor
     {
         public static void Main(string[] args)
         {
