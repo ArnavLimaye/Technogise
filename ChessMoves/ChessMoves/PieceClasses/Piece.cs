@@ -166,24 +166,32 @@ namespace ChessMoves
 
         internal void SearchForAllPossibleAdjacentMoves(ChessBoard chessBoard)
         {
-            SearchForAllPossibleAdjacentDiagonalCells(chessBoard);
-            SearchForAllPossibleAdjacentVerticalCells(chessBoard);
-            SearchForAllPossibleAdjacentHorizontalCells(chessBoard);
+            int initialRow = initialCell.row;
+            int initialColumn = initialCell.column;
+
+            SearchForAllPossibleAdjacentDiagonalMoves(chessBoard,initialRow,initialColumn);
+            SearchForAllPossibleAdjacentVerticalMoves(chessBoard,initialRow, initialColumn);
+            SearchForAllPossibleAdjacentHorizontalMoves(chessBoard,initialRow, initialColumn);
         }
 
-        private void SearchForAllPossibleAdjacentVerticalCells(ChessBoard chessBoard)
+        private void SearchForAllPossibleAdjacentVerticalMoves(ChessBoard chessBoard, int initialRow, int initialColumn)
         {
-            throw new NotImplementedException();
+            AddMoveToPossibleMoves(initialRow + 1, initialColumn,chessBoard);
+            AddMoveToPossibleMoves(initialRow - 1, initialColumn, chessBoard);
         }
 
-        private void SearchForAllPossibleAdjacentHorizontalCells(ChessBoard chessBoard)
+        private void SearchForAllPossibleAdjacentHorizontalMoves(ChessBoard chessBoard, int initialRow, int initialColumn)
         {
-            throw new NotImplementedException();
+            AddMoveToPossibleMoves(initialRow, initialColumn + 1, chessBoard);
+            AddMoveToPossibleMoves(initialRow, initialColumn - 1, chessBoard);
         }
 
-        private void SearchForAllPossibleAdjacentDiagonalCells(ChessBoard chessBoard)
+        private void SearchForAllPossibleAdjacentDiagonalMoves(ChessBoard chessBoard, int initialRow, int initialColumn)
         {
-            throw new NotImplementedException();
+            AddMoveToPossibleMoves(initialRow + 1, initialColumn + 1,chessBoard);
+            AddMoveToPossibleMoves(initialRow + 1, initialColumn - 1,chessBoard);
+            AddMoveToPossibleMoves(initialRow - 1, initialColumn + 1, chessBoard);
+            AddMoveToPossibleMoves(initialRow - 1, initialColumn - 1, chessBoard);
         }
     }
 }

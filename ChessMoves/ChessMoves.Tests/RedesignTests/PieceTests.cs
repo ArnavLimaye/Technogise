@@ -154,7 +154,7 @@ namespace ChessMoves.Tests
         public void AllPossibleAdjacentMovesShouldBeReturnedBySearchForAllPossibleAdjacentMovesMethod()
         {
             //Arrange
-            string input = "E3";
+            string input = "D3";
             var expectedCells = new List<Cell> { new Cell { row = 3,column = 3}, new Cell { row = 3, column = 5 },
                 new Cell { row = 2,column = 3},new Cell { row = 2,column = 4},new Cell { row = 2,column = 5},
                 new Cell { row = 4,column = 3},new Cell { row = 4,column = 4},new Cell { row = 4,column = 5}};
