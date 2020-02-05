@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 [assembly: InternalsVisibleTo("ChessMoves.Tests")]
 namespace ChessMoves
 {
-    public class Executor
+    internal class Executor
     {
         public static void Main(string[] args)
         {
@@ -17,15 +17,20 @@ namespace ChessMoves
 
             Console.WriteLine("Enter the input");
             userInput = Console.ReadLine();
-            
+
             ChessBoard chessBoard = new ChessBoard();
+
+            Validator.ValidateInput(userInput);
+
+            string pieceName = userInput.Split()[0];
+            string cellString = userInput.Split()[1];
             
-            ChessPiece givenPiece = new ChessPiece();
-            givenPiece.MapUserInputToChessPiece(userInput);
+            Piece piece = Mapper.GetRequiredChessPiece(pieceName);
+            piece.MapUserInputCellToChessPieceInitialCell(cellString);
 
-            givenPiece.GetAllPossibleMoves(chessBoard);
-
-            string outputString = CreateDisplayStringFromCells(givenPiece.allowedCells);
+            piece.SearchForAllPossibleMoves(chessBoard);
+            
+            string outputString = CreateDisplayStringFromCells(piece.allPossibleMoves);
 
             Console.WriteLine(outputString);
             Console.ReadKey();
@@ -36,11 +41,11 @@ namespace ChessMoves
             if (allowedCells == null || allowedCells.Count == 0)
                 return "There are no possible moves for the given piece from given cell";
             string output = "";
-            for(int i=0;i<allowedCells.Count;i++)
+            for (int i = 0; i < allowedCells.Count; i++)
             {
                 output += Initializer.columnNumberToNameMap[allowedCells[i].column];
                 output += Initializer.rowNumberToNameMap[allowedCells[i].row];
-                if(i < allowedCells.Count - 1)
+                if (i < allowedCells.Count - 1)
                     output += ",";
             }
             return output;
