@@ -43,7 +43,8 @@
     <Compile Include="Executor.cs" />
     <Compile Include="Initializer.cs" />
     <Compile Include="MoveType.cs" />
-    <Compile Include="Piece.cs" />
+    <Compile Include="PieceClasses\Piece.cs" />
+    <Compile Include="PieceClasses\Bishop.cs" />
     <Compile Include="PieceClasses\Pawn.cs" />
   </ItemGroup>
   <ItemGroup>
