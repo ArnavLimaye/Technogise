@@ -163,5 +163,27 @@ namespace ChessMoves
             AddMoveToPossibleMoves(initialRow + 2, initialColumn - 1, chessBoard);
             AddMoveToPossibleMoves(initialRow - 2, initialColumn - 1, chessBoard);
         }
+
+        internal void SearchForAllPossibleAdjacentMoves(ChessBoard chessBoard)
+        {
+            SearchForAllPossibleAdjacentDiagonalCells(chessBoard);
+            SearchForAllPossibleAdjacentVerticalCells(chessBoard);
+            SearchForAllPossibleAdjacentHorizontalCells(chessBoard);
+        }
+
+        private void SearchForAllPossibleAdjacentVerticalCells(ChessBoard chessBoard)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SearchForAllPossibleAdjacentHorizontalCells(ChessBoard chessBoard)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SearchForAllPossibleAdjacentDiagonalCells(ChessBoard chessBoard)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
