@@ -13,16 +13,16 @@ namespace ChessMoves.Tests
         ChessBoard chessBoard = new ChessBoard();
 
         [Theory]
-        [InlineData("C6",3,7)]
-        public void OnlyForwardVerticalCellShouldBeReturned(string input,int outputColumn, int outputRow)
+        [InlineData(3,6,3,7)]
+        public void OnlyForwardVerticalCellShouldBeReturned(int inputColumn,int inputRow, int outputColumn, int outputRow)
         {
             //Arrange
             Initializer.Initialize();
             List<Cell> expectedCells = new List<Cell> { new Cell { row = outputRow, column = outputColumn } };
             Pawn pawn = new Pawn();
+            pawn.initialCell = new Cell { column = inputColumn, row = inputRow };
 
             //Act
-            pawn.MapUserInputCellToChessPieceInitialRowColumn(input);
             pawn.SearchForAllPossibleMoves(chessBoard);
 
             //Assert
@@ -30,15 +30,15 @@ namespace ChessMoves.Tests
         }
 
         [Theory]
-        [InlineData("D8")]
-        public void NoMovesShouldBeReturnedIfPawnIsAtTopmostRow(string input)
+        [InlineData(8,4)]
+        public void NoMovesShouldBeReturnedIfPawnIsAtTopmostRow(int inputRow,int inputColumn)
         {
             //Arrange
             Initializer.Initialize();
             Pawn pawn = new Pawn();
+            pawn.initialCell = new Cell { row = inputRow, column = inputColumn };
 
             //Act
-            pawn.MapUserInputCellToChessPieceInitialRowColumn(input);
             pawn.SearchForAllPossibleMoves(chessBoard);
 
             //Assert

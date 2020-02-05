@@ -12,39 +12,6 @@ namespace ChessMoves.Tests
     {
         ChessBoard chessBoard = new ChessBoard();
 
-        [Fact]
-        public void InvalidArgumentExceptionShouldBeThrownIfUserGivesInputWithoutSpace()
-        {
-            //Arrange
-
-            //Act
-            string userInput = "RookB6";
-            var piece = new FakePiece();
-            
-            //Assert
-            var ex = Assert.Throws<ArgumentException>(() => piece.MapUserInputToChessPiece(userInput));
-            Assert.Equal("Invalid Input", ex.Message);
-        }
-
-        [Theory]
-        [InlineData("I6", "Invalid Column Name")]
-        [InlineData("H9", "Invalid Row Number")]
-        [InlineData("6B", "Invalid Column Name")]
-        [InlineData("BB", "Invalid Row Number")]
-        [InlineData("66", "Invalid Column Name")]
-        public void InvalidArgumentExceptionShouldBeThrownIfUserInputsInvalidCell(string cell,string expectedErrorMessage)
-        {
-            //Arrange
-
-            //Act
-            string userInputCell = cell;
-            Piece piece = new FakePiece();
-
-            //Assert
-            var ex = Assert.Throws<ArgumentException>(() => piece.MapUserInputCellToChessPieceInitialRowColumn(userInputCell));
-            Assert.Equal(expectedErrorMessage, ex.Message);
-        }
-
         [Theory]
         [InlineData("B6")]
         public void ValidCellShouldSetChessPieceCellRowAndCellColumnPropertiesRightly(string inputCell)
@@ -55,42 +22,27 @@ namespace ChessMoves.Tests
 
             //Act
             FakePiece piece = new FakePiece();
-            piece.MapUserInputCellToChessPieceInitialRowColumn(inputCell);
+            piece.MapUserInputCellToChessPieceInitialCell(inputCell);
 
             //Assert
             Assert.Equal(expectedColumn, piece.initialCell.column);
             Assert.Equal(expectedRow, piece.initialCell.row);
         }
 
-        [Theory]
-        [InlineData("Rook B6")]
-        public void ValidInputShouldBeMappedToChessPieceRightly(string userInput)
-        {
-            //Arrange
-            int expectedColumn = 2;
-            int expectedRow = 6;
-
-            //Act
-            FakePiece piece = new FakePiece();
-            piece.MapUserInputToChessPiece(userInput);
-
-            //Assert
-            Assert.Equal(expectedColumn, piece.initialCell.column);
-            Assert.Equal(expectedRow, piece.initialCell.row);
-        }
 
         [Fact]
         public void AllPossibleDiagonalMovesShouldBeReturnedBySearchForAllPossibleDiagonalMovesMethod()
         {
             //Arrange
-            string input = "G7";
+            int inputRow = 7;
+            int inputColumn = 7;
             var expectedCells = new List<Cell> { new Cell { row = 8,column = 8},new Cell { row = 6,column = 6},
                 new Cell { row = 5,column = 5},new Cell { row = 4, column = 4}, new Cell { row = 3, column = 3},
                 new Cell { row = 2,column =2},new Cell{ row= 1,column = 1},new Cell{ row = 8,column=6},new Cell{ row = 6,column = 8} };
 
             //Act
             FakePiece piece = new FakePiece();
-            piece.MapUserInputCellToChessPieceInitialRowColumn(input);
+            piece.initialCell = new Cell { row = inputRow, column = inputColumn };
             piece.SearchForAllPossibleDiagonalMoves(chessBoard);
 
             //Assert
@@ -101,14 +53,15 @@ namespace ChessMoves.Tests
         public void AllPossibleHorizontalMovesShouldBeReturnedBySearchForAllPossibleHorizontalMovesMethod()
         {
             //Arrange
-            string input = "B3";
+            int inputRow = 3;
+            int inputColumn = 2;
             var expectedCells = new List<Cell> { new Cell { row = 3,column = 1}, new Cell { row = 3, column = 3 },
                 new Cell { row = 3,column = 4},new Cell { row = 3,column = 5},new Cell { row = 3,column = 6},new Cell { row = 3,column = 7}
                 ,new Cell { row = 3,column = 8}};
 
             //Act
             FakePiece piece = new FakePiece();
-            piece.MapUserInputCellToChessPieceInitialRowColumn(input);
+            piece.initialCell = new Cell { column = inputColumn, row = inputRow };
             piece.SearchForAllPossibleHorizontalMoves(chessBoard);
 
             //Assert
@@ -119,14 +72,15 @@ namespace ChessMoves.Tests
         public void AllPossibleVerticalMovesShouldBeReturnedBySearchForAllPossibleVerticalMovesMethod()
         {
             //Arrange
-            string input = "H6";
+            int inputRow = 6;
+            int inputColumn = 8;
             var expectedCells = new List<Cell> { new Cell { row = 1,column = 8}, new Cell { row = 2, column = 8 },
                 new Cell { row = 3,column = 8},new Cell { row = 4,column = 8},new Cell { row = 5,column = 8},new Cell { row = 7,column = 8}
                 ,new Cell { row = 8,column = 8}};
 
             //Act
             FakePiece piece = new FakePiece();
-            piece.MapUserInputCellToChessPieceInitialRowColumn(input);
+            piece.initialCell = new Cell { row = inputRow, column = inputColumn };
             piece.SearchForAllPossibleVerticalMoves(chessBoard);
 
             //Assert
@@ -137,13 +91,14 @@ namespace ChessMoves.Tests
         public void AllPossibleSpecialMovesShouldBeReturnedBySearchForAllPossibleSpecialMovesMethod()
         {
             //Arrange
-            string input = "H7";
+            int inputRow = 7;
+            int inputColumn = 8;
             var expectedCells = new List<Cell> { new Cell { row = 8,column = 6}, new Cell { row = 6, column = 6 },
                 new Cell { row = 5,column = 7}};
 
             //Act
             FakePiece piece = new FakePiece();
-            piece.MapUserInputCellToChessPieceInitialRowColumn(input);
+            piece.initialCell = new Cell { row = inputRow, column = inputColumn };
             piece.SearchForAllPossibleSpecialMoves(chessBoard);
 
             //Assert
@@ -154,14 +109,15 @@ namespace ChessMoves.Tests
         public void AllPossibleAdjacentMovesShouldBeReturnedBySearchForAllPossibleAdjacentMovesMethod()
         {
             //Arrange
-            string input = "D3";
+            int inputRow = 3;
+            int inputColumn = 4;
             var expectedCells = new List<Cell> { new Cell { row = 3,column = 3}, new Cell { row = 3, column = 5 },
                 new Cell { row = 2,column = 3},new Cell { row = 2,column = 4},new Cell { row = 2,column = 5},
                 new Cell { row = 4,column = 3},new Cell { row = 4,column = 4},new Cell { row = 4,column = 5}};
 
             //Act
             FakePiece piece = new FakePiece();
-            piece.MapUserInputCellToChessPieceInitialRowColumn(input);
+            piece.initialCell = new Cell { column = inputColumn, row = inputRow };
             piece.SearchForAllPossibleAdjacentMoves(chessBoard);
 
             //Assert

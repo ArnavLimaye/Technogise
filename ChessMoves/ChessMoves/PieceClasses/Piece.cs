@@ -22,30 +22,10 @@ namespace ChessMoves
 
         internal abstract void SearchForAllPossibleMoves(ChessBoard chessBoard);
 
-        internal void MapUserInputToChessPiece(string userInput)
+        internal void MapUserInputCellToChessPieceInitialCell(string userInputCell)
         {
-            string[] nameAndCell = userInput.Split(' ');
-            if (nameAndCell.Length != 2)
-            {
-                throw new ArgumentException("Invalid Input");
-            }
-
-            MapUserInputCellToChessPieceInitialRowColumn(nameAndCell[1]);
-        }
-
-        internal void MapUserInputCellToChessPieceInitialRowColumn(string userInputCell)
-        {
-            if (userInputCell.Length != 2)
-                throw new ArgumentException("Invalid Cell number");
-
             char columnChar = userInputCell[0];
             char rowChar = userInputCell[1];
-
-            if (!Initializer.columnNameToNumberMap.ContainsKey(columnChar.ToString()))
-                throw new ArgumentException("Invalid Column Name");
-
-            if (!Initializer.rowNameToNumberMap.ContainsKey(rowChar.ToString()))
-                throw new ArgumentException("Invalid Row Number");
 
             int initialColumn = Initializer.columnNameToNumberMap[columnChar.ToString()];
             int initialRow = Initializer.rowNameToNumberMap[rowChar.ToString()];
