@@ -42,6 +42,7 @@
     <Compile Include="ChessPiece.cs" />
     <Compile Include="Executor.cs" />
     <Compile Include="Initializer.cs" />
+    <Compile Include="Mapper.cs" />
     <Compile Include="MoveType.cs" />
     <Compile Include="PieceClasses\Horse.cs" />
     <Compile Include="PieceClasses\King.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="PieceClasses\Bishop.cs" />
     <Compile Include="PieceClasses\Pawn.cs" />
     <Compile Include="PieceClasses\Queen.cs" />
+    <Compile Include="PieceClasses\Rook.cs" />
     <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>

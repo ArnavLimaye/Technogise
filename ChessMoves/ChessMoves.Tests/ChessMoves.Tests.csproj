@@ -81,6 +81,7 @@
     <Compile Include="ChessPieceTests.cs" />
     <Compile Include="RedesignTests\FakePiece.cs" />
     <Compile Include="InitializerTests.cs" />
+    <Compile Include="RedesignTests\MapperTests.cs" />
     <Compile Include="RedesignTests\PawnTests.cs" />
     <Compile Include="RedesignTests\PieceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
