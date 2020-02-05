@@ -13,17 +13,17 @@ namespace ChessMoves
     {
         private string _name;
 
-        private List<MoveTypes> _allowedMoveTypes;
+        private List<MoveType> _allowedMoveTypes;
 
         internal Cell initialCell;
 
         internal List<Cell> allowedCells;
 
-        public enum MoveTypes { Horizontal = 1, Vertical, Diagonal, Special, SingleCell, MultiCell, OnlyForward }    //Special is for Knight's movement
+        
         
         public string Name { get { return _name; } set { _name = value; } }
 
-        public List<MoveTypes> AllowedMoveTypes { get { return _allowedMoveTypes; } set { _allowedMoveTypes = value; } }
+        public List<MoveType> AllowedMoveTypes { get { return _allowedMoveTypes; } set { _allowedMoveTypes = value; } }
 
         
         internal void MapUserInputToChessPiece(string userInput)
@@ -83,22 +83,22 @@ namespace ChessMoves
 
         internal void GetAllPossibleMoves(ChessBoard chessBoard)
         {
-            if (AllowedMoveTypes.Contains(MoveTypes.Diagonal))
+            if (AllowedMoveTypes.Contains(MoveType.Diagonal))
             { 
                 GetAllPossibleDiagonalMoves(chessBoard); 
             }
             
-            if (AllowedMoveTypes.Contains(MoveTypes.Vertical))
+            if (AllowedMoveTypes.Contains(MoveType.Vertical))
             { 
                 GetAllPossibleVerticalMoves(chessBoard); 
             }
             
-            if (AllowedMoveTypes.Contains(MoveTypes.Horizontal))
+            if (AllowedMoveTypes.Contains(MoveType.Horizontal))
             { 
                 GetAllPossibleHorizontalMoves(chessBoard); 
             }
             
-            if (AllowedMoveTypes.Contains(MoveTypes.Special))
+            if (AllowedMoveTypes.Contains(MoveType.Special))
             {
                 GetSpecialMoves(chessBoard);
             }
@@ -169,14 +169,14 @@ namespace ChessMoves
 
         
 
-        private bool CheckIfPieceIsForwardOnly(List<MoveTypes> allowedMoveTypes)
+        private bool CheckIfPieceIsForwardOnly(List<MoveType> allowedMoveTypes)
         {
-            return allowedMoveTypes.Contains(MoveTypes.OnlyForward);
+            return allowedMoveTypes.Contains(MoveType.OnlyForward);
         }
 
-        private bool CheckIfPieceIsSingleMovePiece(List<MoveTypes> allowedMoveTypes)
+        private bool CheckIfPieceIsSingleMovePiece(List<MoveType> allowedMoveTypes)
         {
-            return allowedMoveTypes.Contains(MoveTypes.SingleCell);
+            return allowedMoveTypes.Contains(MoveType.SingleCell);
         }
 
         internal void GetAllPossibleHorizontalMoves(ChessBoard chessBoard)
@@ -227,7 +227,7 @@ namespace ChessMoves
             }
         }
 
-        private void GetAllAdjacentVerticalCells(List<MoveTypes> allowedMoveTypes,ChessBoard chessBoard)
+        private void GetAllAdjacentVerticalCells(List<MoveType> allowedMoveTypes,ChessBoard chessBoard)
         {
             bool isForwardOnly = CheckIfPieceIsForwardOnly(allowedMoveTypes);
 

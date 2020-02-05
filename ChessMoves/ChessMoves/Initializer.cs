@@ -12,7 +12,7 @@ namespace ChessMoves
     //To initialize the chessboard and chess pieces according to default rules
     internal static class Initializer
     {
-        public static Dictionary<string,List<MoveTypes>> pieceNameToPieceMoveMap = new Dictionary<string, List<MoveTypes>>();
+        public static Dictionary<string,List<MoveType>> pieceNameToPieceMoveMap = new Dictionary<string, List<MoveType>>();
 
         public static Dictionary<string, int> columnNameToNumberMap = new Dictionary<string, int>();
 
@@ -27,7 +27,7 @@ namespace ChessMoves
         {
             if (firstInstance)
             {
-                InitializePieceMoveDictioanry();
+                InitializePieceNameToPieceMoveTypeDictioanry();
 
                 InitializeColumnNumberToNameDictionary();
 
@@ -89,14 +89,14 @@ namespace ChessMoves
             rowNameToNumberMap.Add("8", 8);
         }
 
-        private static void InitializePieceMoveDictioanry()
+        private static void InitializePieceNameToPieceMoveTypeDictioanry()
         {
-            pieceNameToPieceMoveMap.Add("King", new List<MoveTypes> { MoveTypes.Horizontal, MoveTypes.Vertical, MoveTypes.Diagonal, MoveTypes.SingleCell });
-            pieceNameToPieceMoveMap.Add("Queen", new List<MoveTypes> { MoveTypes.Horizontal, MoveTypes.Vertical, MoveTypes.Diagonal, MoveTypes.MultiCell });
-            pieceNameToPieceMoveMap.Add("Bishop", new List<MoveTypes> { MoveTypes.Diagonal, MoveTypes.MultiCell });
-            pieceNameToPieceMoveMap.Add("Horse", new List<MoveTypes> { MoveTypes.Special });
-            pieceNameToPieceMoveMap.Add("Rook", new List<MoveTypes> { MoveTypes.Horizontal, MoveTypes.Vertical, MoveTypes.MultiCell });
-            pieceNameToPieceMoveMap.Add("Pawn", new List<MoveTypes> { MoveTypes.Vertical, MoveTypes.SingleCell,MoveTypes.OnlyForward });
+            pieceNameToPieceMoveMap.Add("King", new List<MoveType> { MoveType.Horizontal, MoveType.Vertical, MoveType.Diagonal, MoveType.SingleCell });
+            pieceNameToPieceMoveMap.Add("Queen", new List<MoveType> { MoveType.Horizontal, MoveType.Vertical, MoveType.Diagonal, MoveType.MultiCell });
+            pieceNameToPieceMoveMap.Add("Bishop", new List<MoveType> { MoveType.Diagonal, MoveType.MultiCell });
+            pieceNameToPieceMoveMap.Add("Horse", new List<MoveType> { MoveType.Special });
+            pieceNameToPieceMoveMap.Add("Rook", new List<MoveType> { MoveType.Horizontal, MoveType.Vertical, MoveType.MultiCell });
+            pieceNameToPieceMoveMap.Add("Pawn", new List<MoveType> { MoveType.Vertical, MoveType.SingleCell,MoveType.OnlyForward });
         }
     }
 }
