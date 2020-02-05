@@ -65,5 +65,21 @@ namespace ChessMoves.Tests.RedesignTests
             var ex = Assert.Throws<ArgumentException>(() => Validator.ValidateInputCell(userInputCell));
             Assert.Equal(Validator.InvalidRowNumber,ex.Message);
         }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("B")]
+        [InlineData("B66")]
+        public void InvalidArgumentExceptionShouldBeThrownIfUserInputsInvalidCell(string cell)
+        {
+            //Arrange
+
+            //Act
+            string userInputCell = cell;
+
+            //Assert
+            var ex = Assert.Throws<ArgumentException>(() => Validator.ValidateInputCell(userInputCell));
+            Assert.Equal(Validator.InvalidCell, ex.Message);
+        }
     }
 }

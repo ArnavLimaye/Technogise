@@ -22,11 +22,15 @@ namespace ChessMoves
 
         public static Dictionary<string, int> rowNameToNumberMap = new Dictionary<string, int>();
 
+        public static HashSet<string> pieceNames = new HashSet<string>();
+
         public static bool firstInstance = true;
         public static void Initialize()
         {
             if (firstInstance)
             {
+                InitializePieceNames();
+
                 InitializePieceNameToPieceMoveTypeDictioanry();
 
                 InitializeColumnNumberToNameDictionary();
@@ -39,6 +43,16 @@ namespace ChessMoves
 
                 firstInstance = false;
             }
+        }
+
+        private static void InitializePieceNames()
+        {
+            pieceNames.Add("king");
+            pieceNames.Add("queen");
+            pieceNames.Add("bishop");
+            pieceNames.Add("rook");
+            pieceNames.Add("horse");
+            pieceNames.Add("pawn");
         }
 
         private static void InitializeColumnNumberToNameDictionary()

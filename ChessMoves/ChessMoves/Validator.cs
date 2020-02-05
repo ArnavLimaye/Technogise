@@ -10,24 +10,44 @@ namespace ChessMoves
 {
     internal static class Validator
     {
-        internal static string InvalidInputError = "Invalid Input : No Space Between Piece Name and Initial Cell";
+        internal static string InvalidInputError = "Invalid Input";
         internal static string InvalidNameError = "Incorrect Piece Name";
         internal static string InvalidColumnName = "Invalid Column Name";
         internal static string InvalidRowNumber = "Invalid Row Number";
+        internal static string InvalidCell = "Invalid Cell";
 
         public static void ValidateInput(string userInput)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userInput))
+                throw new ArgumentException(InvalidInputError);
+            
+            string[] nameAndCell = userInput.Split(' ');
+            if (nameAndCell.Length != 2)
+                throw new ArgumentException(InvalidInputError);
+            
+            ValidateInputName(nameAndCell[0]);
+            ValidateInputCell(nameAndCell[1]);
         }
 
         internal static void ValidateInputName(string userInputName)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userInputName))
+                throw new ArgumentException(InvalidNameError);
+            if (!Initializer.pieceNames.Contains(userInputName.ToLower()))
+                throw new ArgumentException(InvalidNameError);
         }
 
         internal static void ValidateInputCell(string userInputCell)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userInputCell) || userInputCell.Length != 2)
+                throw new ArgumentException(InvalidCell);
+            
+            char columnName = userInputCell[0];
+            char rowName = userInputCell[1];
+            if (!Initializer.columnNameToNumberMap.ContainsKey(columnName.ToString().ToUpper()))
+                throw new ArgumentException(InvalidColumnName);
+            if (!Initializer.rowNameToNumberMap.ContainsKey(rowName.ToString()))
+                throw new ArgumentException(InvalidRowNumber);
         }
     }
 }
