@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 [assembly: InternalsVisibleTo("ChessPiece.Tests")]
 namespace ChessMoves.PieceClasses
 {
-    internal class Pawn : Piece
+    internal class Bishop : Piece
     {
-        internal override void SearchForAllPossibleMoves(ChessBoard chessBoard)
+        internal override void SearchForAllPossibleMoves(ChessBoard chessboard)
         {
-            AddMoveToPossibleMoves(initialCell.row + 1, initialCell.column, chessBoard);
+            SearchForAllPossibleDiagonalMoves(chessboard);
         }
     }
 }
