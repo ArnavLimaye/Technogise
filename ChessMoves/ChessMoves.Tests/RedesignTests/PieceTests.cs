@@ -10,6 +10,8 @@ namespace ChessMoves.Tests
 {
     public class PieceTests
     {
+        ChessBoard chessBoard = new ChessBoard();
+
         [Fact]
         public void InvalidArgumentExceptionShouldBeThrownIfUserGivesInputWithoutSpace()
         {
@@ -76,5 +78,29 @@ namespace ChessMoves.Tests
             Assert.Equal(expectedColumn, piece.initialCell.column);
             Assert.Equal(expectedRow, piece.initialCell.row);
         }
+
+        [Fact]
+        public void AllPossibleDiagonalMovesShouldBeReturnedBySearchForAllPossibleDiagonalMovesMethod()
+        {
+            //Arrange
+            string input = "G7";
+            var expectedCells = new List<Cell> { new Cell { row = 8,column = 8},new Cell { row = 6,column = 6},
+                new Cell { row = 5,column = 5},new Cell { row = 4, column = 4}, new Cell { row = 3, column = 3},
+                new Cell { row = 2,column =2},new Cell{ row= 1,column = 1},new Cell{ row = 8,column=6},new Cell{ row = 6,column = 8} };
+
+            //Act
+            FakePiece piece = new FakePiece();
+            piece.MapUserInputCellToChessPieceInitialRowColumn(input);
+            piece.SearchForAllPossibleDiagonalMoves(chessBoard);
+
+            //Assert
+            Assert.True(AreTwoListsEquivalent(expectedCells,piece.allPossibleMoves));
+        }
+
+        private bool AreTwoListsEquivalent(List<Cell> expectedOutputCells, List<Cell> actualOutputCells)
+        {
+            return (expectedOutputCells.All(actualOutputCells.Contains) && expectedOutputCells.Count == actualOutputCells.Count);
+        }
+
     }
 }

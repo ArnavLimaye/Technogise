@@ -79,10 +79,10 @@
   <ItemGroup>
     <Compile Include="ChessBoardTests.cs" />
     <Compile Include="ChessPieceTests.cs" />
-    <Compile Include="FakePiece.cs" />
+    <Compile Include="RedesignTests\FakePiece.cs" />
     <Compile Include="InitializerTests.cs" />
-    <Compile Include="PawnTests.cs" />
-    <Compile Include="PieceTests.cs" />
+    <Compile Include="RedesignTests\PawnTests.cs" />
+    <Compile Include="RedesignTests\PieceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
