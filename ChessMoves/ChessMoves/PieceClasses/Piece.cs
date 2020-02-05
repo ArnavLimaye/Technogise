@@ -125,17 +125,43 @@ namespace ChessMoves
 
         internal void SearchForAllPossibleVerticalMoves(ChessBoard chessBoard)
         {
-            throw new NotImplementedException();
+            int i = 1;
+            while (i <= chessBoard.Rows)
+            {
+                if (initialCell.row != i) //Exclude initial cell
+                {
+                    AddMoveToPossibleMoves(i, initialCell.column, chessBoard);
+                }
+                i++;
+            }
         }
 
         internal void SearchForAllPossibleHorizontalMoves(ChessBoard chessBoard)
         {
-            throw new NotImplementedException();
+            int j = 1;
+            while (j <= chessBoard.Columns)
+            {
+                if (initialCell.column != j) //Exclude initial cell
+                {
+                    AddMoveToPossibleMoves(initialCell.row, j , chessBoard);
+                }
+                j++;
+            }
         }
 
         internal void SearchForAllPossibleSpecialMoves(ChessBoard chessBoard)
         {
-            throw new NotImplementedException();
+            int initialRow = initialCell.row;
+            int initialColumn = initialCell.column;
+
+            AddMoveToPossibleMoves(initialRow + 1, initialColumn + 2, chessBoard);
+            AddMoveToPossibleMoves(initialRow + 1, initialColumn - 2, chessBoard);
+            AddMoveToPossibleMoves(initialRow - 1, initialColumn + 2, chessBoard);
+            AddMoveToPossibleMoves(initialRow - 1, initialColumn - 2, chessBoard);
+            AddMoveToPossibleMoves(initialRow + 2, initialColumn + 1, chessBoard);
+            AddMoveToPossibleMoves(initialRow - 2, initialColumn + 1, chessBoard);
+            AddMoveToPossibleMoves(initialRow + 2, initialColumn - 1, chessBoard);
+            AddMoveToPossibleMoves(initialRow - 2, initialColumn - 1, chessBoard);
         }
     }
 }

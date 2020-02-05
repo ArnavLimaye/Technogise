@@ -138,8 +138,8 @@ namespace ChessMoves.Tests
         {
             //Arrange
             string input = "H7";
-            var expectedCells = new List<Cell> { new Cell { row = 5,column = 8}, new Cell { row = 5, column = 6 },
-                new Cell { row = 8,column = 5},new Cell { row = 6,column = 5}};
+            var expectedCells = new List<Cell> { new Cell { row = 8,column = 6}, new Cell { row = 6, column = 6 },
+                new Cell { row = 5,column = 7}};
 
             //Act
             FakePiece piece = new FakePiece();
