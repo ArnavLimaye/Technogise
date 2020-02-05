@@ -25,7 +25,7 @@ namespace ChessMoves.Tests
             //Arrange
             string expectedName = "Rook";
             List<Cell> expectedAllowedCells = new List<Cell> { new Cell() { row = 1, column = 2 }, new Cell() { row = 2, column = 3 } };
-            List<MoveTypes> expectedAllowedMoveTypes = new List<MoveTypes>() { MoveTypes.Horizontal };
+            List<MoveType> expectedAllowedMoveTypes = new List<MoveType>() { MoveType.Horizontal };
             Cell expectedInitialCell = new Cell() { row = 3, column = 4};
             var expectedAllowedCellsStr = JsonConvert.SerializeObject(expectedAllowedCells);
             var expectedInitialCellStr = JsonConvert.SerializeObject(expectedInitialCell);
@@ -34,7 +34,7 @@ namespace ChessMoves.Tests
             ChessPiece piece = new ChessPiece();
             piece.Name = "Rook";
             piece.allowedCells = new List<Cell> { new Cell() { row = 1, column = 2 }, new Cell() { row = 2, column = 3 } }; ;
-            piece.AllowedMoveTypes = new List<MoveTypes>() { MoveTypes.Horizontal };
+            piece.AllowedMoveTypes = new List<MoveType>() { MoveType.Horizontal };
             piece.initialCell = new Cell() { row = 3, column = 4 };
             var allowedCellsStr = JsonConvert.SerializeObject(piece.allowedCells);
             var initialCellStr = JsonConvert.SerializeObject(piece.initialCell);
@@ -98,7 +98,7 @@ namespace ChessMoves.Tests
         {
             //Arrange
             string expected = pieceName;
-            List<MoveTypes> expectedMoveTypes = Initializer.pieceNameToPieceMoveMap[pieceName];
+            List<MoveType> expectedMoveTypes = Initializer.pieceNameToPieceMoveMap[pieceName];
 
             //Act
             ChessPiece piece = new ChessPiece();
