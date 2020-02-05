@@ -72,25 +72,6 @@ namespace ChessMoves
             SearchForAllPossibleMovesOnTheSouthEastOfInitialCell(chessBoard);
 
             SearchForAllPossibleMovesOnTheSouthWestOfInitialCell(chessBoard);
-            /****i = initialCell.row - 1;
-            j = initialCell.column - 1;
-            //Adding cells on SouthWest side
-            while (i > 0 && j > 0)
-            {
-                AddCell(i, j, chessBoard);
-                i--;
-                j--;
-            }
-
-            i = initialCell.row - 1;
-            j = initialCell.column + 1;
-            //Adding cells on SouthEast side
-            while (i > 0 && j <= chessBoard.Columns)
-            {
-                AddCell(i, j, chessBoard);
-                i--;
-                j++;
-            }***/
         }
 
         private void SearchForAllPossibleMovesOnTheSouthWestOfInitialCell(ChessBoard chessBoard)
@@ -140,6 +121,21 @@ namespace ChessMoves
                 i++;
                 j++;
             }
+        }
+
+        internal void SearchForAllPossibleVerticalMoves(ChessBoard chessBoard)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void SearchForAllPossibleHorizontalMoves(ChessBoard chessBoard)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void SearchForAllPossibleSpecialMoves(ChessBoard chessBoard)
+        {
+            throw new NotImplementedException();
         }
     }
 }

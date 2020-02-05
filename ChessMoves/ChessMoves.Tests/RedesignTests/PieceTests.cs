@@ -97,6 +97,59 @@ namespace ChessMoves.Tests
             Assert.True(AreTwoListsEquivalent(expectedCells,piece.allPossibleMoves));
         }
 
+        [Fact]
+        public void AllPossibleHorizontalMovesShouldBeReturnedBySearchForAllPossibleHorizontalMovesMethod()
+        {
+            //Arrange
+            string input = "B3";
+            var expectedCells = new List<Cell> { new Cell { row = 3,column = 1}, new Cell { row = 3, column = 3 },
+                new Cell { row = 3,column = 4},new Cell { row = 3,column = 5},new Cell { row = 3,column = 6},new Cell { row = 3,column = 7}
+                ,new Cell { row = 3,column = 8}};
+
+            //Act
+            FakePiece piece = new FakePiece();
+            piece.MapUserInputCellToChessPieceInitialRowColumn(input);
+            piece.SearchForAllPossibleHorizontalMoves(chessBoard);
+
+            //Assert
+            Assert.True(AreTwoListsEquivalent(expectedCells, piece.allPossibleMoves));
+        }
+
+        [Fact]
+        public void AllPossibleVerticalMovesShouldBeReturnedBySearchForAllPossibleVerticalMovesMethod()
+        {
+            //Arrange
+            string input = "H6";
+            var expectedCells = new List<Cell> { new Cell { row = 1,column = 8}, new Cell { row = 2, column = 8 },
+                new Cell { row = 3,column = 8},new Cell { row = 4,column = 8},new Cell { row = 5,column = 8},new Cell { row = 7,column = 8}
+                ,new Cell { row = 8,column = 8}};
+
+            //Act
+            FakePiece piece = new FakePiece();
+            piece.MapUserInputCellToChessPieceInitialRowColumn(input);
+            piece.SearchForAllPossibleVerticalMoves(chessBoard);
+
+            //Assert
+            Assert.True(AreTwoListsEquivalent(expectedCells, piece.allPossibleMoves));
+        }
+
+        [Fact]
+        public void AllPossibleSpecialMovesShouldBeReturnedBySearchForAllPossibleSpecialMovesMethod()
+        {
+            //Arrange
+            string input = "H7";
+            var expectedCells = new List<Cell> { new Cell { row = 5,column = 8}, new Cell { row = 5, column = 6 },
+                new Cell { row = 8,column = 5},new Cell { row = 6,column = 5}};
+
+            //Act
+            FakePiece piece = new FakePiece();
+            piece.MapUserInputCellToChessPieceInitialRowColumn(input);
+            piece.SearchForAllPossibleSpecialMoves(chessBoard);
+
+            //Assert
+            Assert.True(AreTwoListsEquivalent(expectedCells, piece.allPossibleMoves));
+        }
+
         private bool AreTwoListsEquivalent(List<Cell> expectedOutputCells, List<Cell> actualOutputCells)
         {
             return (expectedOutputCells.All(actualOutputCells.Contains) && expectedOutputCells.Count == actualOutputCells.Count);
