@@ -150,6 +150,24 @@ namespace ChessMoves.Tests
             Assert.True(AreTwoListsEquivalent(expectedCells, piece.allPossibleMoves));
         }
 
+        [Fact]
+        public void AllPossibleAdjacentMovesShouldBeReturnedBySearchForAllPossibleAdjacentMovesMethod()
+        {
+            //Arrange
+            string input = "E3";
+            var expectedCells = new List<Cell> { new Cell { row = 3,column = 3}, new Cell { row = 3, column = 5 },
+                new Cell { row = 2,column = 3},new Cell { row = 2,column = 4},new Cell { row = 2,column = 5},
+                new Cell { row = 4,column = 3},new Cell { row = 4,column = 4},new Cell { row = 4,column = 5}};
+
+            //Act
+            FakePiece piece = new FakePiece();
+            piece.MapUserInputCellToChessPieceInitialRowColumn(input);
+            piece.SearchForAllPossibleAdjacentMoves(chessBoard);
+
+            //Assert
+            Assert.True(AreTwoListsEquivalent(expectedCells, piece.allPossibleMoves));
+        }
+
         private bool AreTwoListsEquivalent(List<Cell> expectedOutputCells, List<Cell> actualOutputCells)
         {
             return (expectedOutputCells.All(actualOutputCells.Contains) && expectedOutputCells.Count == actualOutputCells.Count);
