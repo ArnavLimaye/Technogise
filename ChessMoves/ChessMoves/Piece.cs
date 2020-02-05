@@ -25,6 +25,17 @@ namespace ChessMoves
             allPossibleMoves.Add(new Cell { row = row, column = column });
         }
 
+        internal void MapUserInputToChessPiece(string userInput)
+        {
+            string[] nameAndCell = userInput.Split(' ');
+            if (nameAndCell.Length != 2)
+            {
+                throw new ArgumentException("Invalid Input");
+            }
+
+            MapUserInputCellToChessPieceInitialRowColumn(nameAndCell[1]);
+        }
+
         internal void MapUserInputCellToChessPieceInitialRowColumn(string userInputCell)
         {
             if (userInputCell.Length != 2)
@@ -37,7 +48,7 @@ namespace ChessMoves
                 throw new ArgumentException("Invalid Column Name");
 
             if (!Initializer.rowNameToNumberMap.ContainsKey(rowChar.ToString()))
-                throw new ArgumentException("Invalid row number");
+                throw new ArgumentException("Invalid Row Number");
 
             int initialColumn = Initializer.columnNameToNumberMap[columnChar.ToString()];
             int initialRow = Initializer.rowNameToNumberMap[rowChar.ToString()];
