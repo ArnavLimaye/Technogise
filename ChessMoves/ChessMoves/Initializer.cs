@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using static ChessMoves.ChessPiece;
 
 [assembly: InternalsVisibleTo("ChessMoves.Tests")]
 namespace ChessMoves
@@ -12,7 +11,6 @@ namespace ChessMoves
     //To initialize the chessboard and chess pieces according to default rules
     internal static class Initializer
     {
-        public static Dictionary<string,List<MoveType>> pieceNameToPieceMoveMap = new Dictionary<string, List<MoveType>>();
 
         public static Dictionary<string, int> columnNameToNumberMap = new Dictionary<string, int>();
 
@@ -30,8 +28,6 @@ namespace ChessMoves
             if (firstInstance)
             {
                 InitializePieceNames();
-
-                InitializePieceNameToPieceMoveTypeDictioanry();
 
                 InitializeColumnNumberToNameDictionary();
 
@@ -101,16 +97,6 @@ namespace ChessMoves
             rowNameToNumberMap.Add("6", 6);
             rowNameToNumberMap.Add("7", 7);
             rowNameToNumberMap.Add("8", 8);
-        }
-
-        private static void InitializePieceNameToPieceMoveTypeDictioanry()
-        {
-            pieceNameToPieceMoveMap.Add("King", new List<MoveType> { MoveType.Horizontal, MoveType.Vertical, MoveType.Diagonal, MoveType.SingleCell });
-            pieceNameToPieceMoveMap.Add("Queen", new List<MoveType> { MoveType.Horizontal, MoveType.Vertical, MoveType.Diagonal, MoveType.MultiCell });
-            pieceNameToPieceMoveMap.Add("Bishop", new List<MoveType> { MoveType.Diagonal, MoveType.MultiCell });
-            pieceNameToPieceMoveMap.Add("Horse", new List<MoveType> { MoveType.Special });
-            pieceNameToPieceMoveMap.Add("Rook", new List<MoveType> { MoveType.Horizontal, MoveType.Vertical, MoveType.MultiCell });
-            pieceNameToPieceMoveMap.Add("Pawn", new List<MoveType> { MoveType.Vertical, MoveType.SingleCell,MoveType.OnlyForward });
         }
     }
 }

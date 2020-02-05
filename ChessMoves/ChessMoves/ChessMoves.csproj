@@ -39,11 +39,8 @@
   <ItemGroup>
     <Compile Include="Cell.cs" />
     <Compile Include="ChessBoard.cs" />
-    <Compile Include="ChessPiece.cs" />
-    <Compile Include="Executor.cs" />
     <Compile Include="Initializer.cs" />
     <Compile Include="Mapper.cs" />
-    <Compile Include="MoveType.cs" />
     <Compile Include="PieceClasses\Horse.cs" />
     <Compile Include="PieceClasses\King.cs" />
     <Compile Include="NewExecutor.cs" />

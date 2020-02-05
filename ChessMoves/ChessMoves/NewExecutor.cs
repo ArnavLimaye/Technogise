@@ -10,7 +10,7 @@ namespace ChessMoves
 {
     internal class NewExecutor
     {
-        /***public static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string userInput;
             Initializer.Initialize();
@@ -21,11 +21,34 @@ namespace ChessMoves
             ChessBoard chessBoard = new ChessBoard();
 
             Validator.ValidateInput(userInput);
-            
-            //string outputString = CreateDisplayStringFromCells(givenPiece.allowedCells);
 
-            //Console.WriteLine(outputString);
+            string pieceName = userInput.Split()[0];
+            string cellString = userInput.Split()[1];
+            
+            Piece piece = Mapper.GetRequiredChessPiece(pieceName);
+            piece.MapUserInputCellToChessPieceInitialCell(cellString);
+
+            piece.SearchForAllPossibleMoves(chessBoard);
+            
+            string outputString = CreateDisplayStringFromCells(piece.allPossibleMoves);
+
+            Console.WriteLine(outputString);
             Console.ReadKey();
-        }***/
+        }
+
+        private static string CreateDisplayStringFromCells(List<Cell> allowedCells)
+        {
+            if (allowedCells == null || allowedCells.Count == 0)
+                return "There are no possible moves for the given piece from given cell";
+            string output = "";
+            for (int i = 0; i < allowedCells.Count; i++)
+            {
+                output += Initializer.columnNumberToNameMap[allowedCells[i].column];
+                output += Initializer.rowNumberToNameMap[allowedCells[i].row];
+                if (i < allowedCells.Count - 1)
+                    output += ",";
+            }
+            return output;
+        }
     }
 }
